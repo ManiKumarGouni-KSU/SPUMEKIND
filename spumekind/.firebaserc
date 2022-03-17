@@ -1,5 +1,9 @@
 {
   "projects": {
+<<<<<<< HEAD
     "default": "emergingswe-bd158"
+=======
+    "default": "spumekind-cc37c"
+>>>>>>> 1b2db327eb44f510b6b400736975a9d469a6a209
   }
 }

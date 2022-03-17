@@ -13,5 +13,10 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+<<<<<<< HEAD
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMERGINGSWE_BD158 }}'
           projectId: emergingswe-bd158
+=======
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPUMEKIND_CC37C }}'
+          projectId: spumekind-cc37c
+>>>>>>> 1b2db327eb44f510b6b400736975a9d469a6a209

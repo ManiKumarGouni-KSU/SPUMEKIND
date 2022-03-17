@@ -5,7 +5,11 @@ name: Deploy to Firebase Hosting on merge
 'on':
   push:
     branches:
+<<<<<<< HEAD
       - main
+=======
+      - master
+>>>>>>> 1b2db327eb44f510b6b400736975a9d469a6a209
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -15,6 +19,12 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+<<<<<<< HEAD
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMERGINGSWE_BD158 }}'
           channelId: live
           projectId: emergingswe-bd158
+=======
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPUMEKIND_CC37C }}'
+          channelId: live
+          projectId: spumekind-cc37c
+>>>>>>> 1b2db327eb44f510b6b400736975a9d469a6a209
