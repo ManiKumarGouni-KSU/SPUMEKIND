@@ -1,7 +1,7 @@
 import TinderCard from 'react-tinder-card';
 import logo from './logo192.png'
 import React, { useState } from 'react'
-
+import ProfileUi from 'react-profile-card';
 const db = [
   {
     name: 'Richard Hendricks',
@@ -49,13 +49,17 @@ return (
   <div>
   <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
   <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
-  <h1>React Tinder Card</h1>
   <div className='cardContainer'>
     {characters.map((character) =>
       <TinderCard className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
-        <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
-          <h3>{character.name}</h3>
-        </div>
+         <div> 
+      <ProfileUi 
+          imgUrl='https://miro.medium.com/max/2048/0*0fClPmIScV5pTLoE.jpg' 
+          name='Vijay' 
+          designation='Architect' 
+         
+          />
+    </div>
       </TinderCard>
     )}
   </div>
