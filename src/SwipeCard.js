@@ -1,5 +1,5 @@
 import TinderCard from 'react-tinder-card';
-import React, { useState } from 'react'
+import React from 'react'
 import ProfileUi from 'react-profile-card';
 const db = [
   {
