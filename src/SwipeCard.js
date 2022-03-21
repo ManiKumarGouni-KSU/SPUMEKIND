@@ -25,11 +25,11 @@ const db = [
 ]
 function SwipeCard(){
   const characters = db
-  const [lastDirection, setLastDirection] = useState()
+  //const [lastDirection, setLastDirection] = useState()
 
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete)
-    setLastDirection(direction)
+    //setLastDirection(direction)
   }
 
   const outOfFrame = (name) => {
