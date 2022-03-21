@@ -1,5 +1,4 @@
 import TinderCard from 'react-tinder-card';
-import logo from './logo192.png'
 import React, { useState } from 'react'
 import ProfileUi from 'react-profile-card';
 const db = [
@@ -37,13 +36,13 @@ function SwipeCard(){
     console.log(name + ' left the screen!')
   }
 
-const onSwipe = (direction) => {
+/* const onSwipe = (direction) => {
   console.log('You swiped: ' + direction)
 }
 
 const onCardLeftScreen = (myIdentifier) => {
   console.log(myIdentifier + ' left the screen')
-}
+} */
 
 return (
   <div>
@@ -63,7 +62,7 @@ return (
       </TinderCard>
     )}
   </div>
-  {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+  {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
 </div>
 )
 
