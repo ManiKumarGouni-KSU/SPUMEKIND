@@ -35,7 +35,7 @@ function MenuListItems(props: any) {
             <TrackChangesIcon />
           </Badge>
         </ListItemIcon>
-        {props.open ? <ListItemText primary='Dashboard' /> : null}
+        {props.open ? <ListItemText primary='User Profile' /> : null}
       </ListItem>
       <ListItem button onClick={() => navigate(`/group`)} sx={{ height: 50 }}>
         <ListItemIcon>

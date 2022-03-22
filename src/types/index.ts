@@ -1,6 +1,7 @@
 export enum PageName {
     LANDING = '',
     SIGIN = '',
+    DASHBOARD = 'User Profile', 
     
 }
 declare module '@mui/material/styles' {
@@ -14,12 +15,13 @@ declare module '@mui/material/styles' {
     }
 }
 export type UserData = {
-    displayName: string;
+    firstName: string;
+    lastName: string;
     email: string;
     photoURL: string;
     gender: string;
-    hostileRating: number;
-    levelOfExperience: number;
-    peerRating: number;
+    age: number;
+    displayname: string;
     interests: string[];
+    description: string;
 } | null;

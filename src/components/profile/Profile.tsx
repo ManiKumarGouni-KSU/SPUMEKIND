@@ -48,6 +48,7 @@ function Profile() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Delete Account</MenuItem>
       </Menu>
     </>
   );
