@@ -1,6 +1,6 @@
 import db from "..";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion  } from 'firebase/firestore';
-import { UserData, UserSaveFormData } from 'types';
+import { UserData } from 'types';
 const COLLECTION_NAME = "users";
 export const getLoggedInUser = async (user: { uid: string; firstName: string; email: string; photoURL: any; lastName: string; displayname: string; age: number}): Promise<UserData> => {
     const docRef = doc(db, COLLECTION_NAME, user.uid);
