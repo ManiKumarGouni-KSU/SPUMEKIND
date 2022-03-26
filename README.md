@@ -3,19 +3,38 @@
 # Team SPUMEKIND
         Name                        Role
         
-  Mani Kumar Gouni              Scrum Master
+  Mani Kumar Gouni &emsp; &emsp; &emsp;Scrum Master
   
-  Deepthi Pottipally            Product Owner
+  Deepthi Pottipally &emsp; &emsp; &emsp;Product Owner
   
-  Sputnika Madhavaram           Tech Lead
+  Sputnika Madhavaram &emsp; &emsp; &emsp;Tech Lead
   
-  Kinjal Rabari                 Developer
   
-  # Product Vision
-  Our product vision is to make this application the favorite place for all 18-year-olds to meet and spend time with each other, rather than just use the app to hook up.
-  
+# Sprint1 Userstories and Forecasted Points(29 Points)
+ 
+ Userstory&emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;Story Points
+ 
+ As a user I want to use SSO login &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;8  
+ 
+ Configure firestore database and create tables &emsp; &emsp; &emsp; &emsp;5  
+ 
+ As a user, I want create profile successfully after signup  &emsp; &emsp;8
+ 
+ As a user, I can swipe the profiles  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;8
+ 
   # Jira Product backlog
   https://swe6763.atlassian.net/jira/software/projects/SPS/boards/4/backlog
   
-  # Backlog order rationale
-  We ordered our backlog based on the Product owner's view on what is considered the most important features.
+#  Sprint Burndown Chart
+
+![image](https://user-images.githubusercontent.com/99055144/160249134-532144fb-1bb8-4c40-9b35-586472941147.png)
+
+# Daily Scrums
+
+# Mob Programming
+
+# Sprint Review
+
+# Working Prototype
+
+https://emergingswe-bd158.web.app/
