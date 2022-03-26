@@ -1,5 +1,4 @@
 import React from 'react';
-import ImageUploading, { ImageListType } from "react-images-uploading";
 import {
   Container,
   Grid,
@@ -32,19 +31,11 @@ type UserProfileFormData = {
 };
 
 function Dashboard() {
-  const [images, setImages] = React.useState([]);
+  
   const [user, setUser] = useState<UserData>();
   const maxNumber = 69;
   const { control, reset, handleSubmit } = useForm<UserProfileFormData>();
   const userRef = collection(db, 'users');
-  const onChange = (
-    imageList: ImageListType,
-    addUpdateIndex: number[] | undefined
-  ) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList as never[]);
-  };
   useEffect(() => {
     const getUser = async () => {
       const currentUser = auth.currentUser || { uid: '' };
@@ -100,44 +91,7 @@ function Dashboard() {
   return (
     <div className="Dashboard">
      
-      <ImageUploading
-        multiple
-        value={images}
-        onChange={onChange}
-        maxNumber={maxNumber}
-        dataURLKey="data_url"
-      >
-        {({
-          imageList,
-          onImageUpload,
-          onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps,
-        }) => (
-          // write your building UI
-          <div className="upload__image-wrapper">
-            <button
-              style={isDragging ? { color: 'red' } : undefined}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              Click or Drop here
-            </button>
-            
-            
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image['data_url']} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </ImageUploading>
+      
       
       <form id='userForm' onSubmit={onSubmit}>
       <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
