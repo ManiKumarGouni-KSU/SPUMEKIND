@@ -9,6 +9,7 @@ import { setUser } from 'modules/user';
 import { useAppDispatch } from 'hooks';
 import { getLoggedInUser } from 'db/repository/user';
 import DashboardPage from 'pages/DashboardPage';
+import SwipeCardPage from 'pages/SwipeCardPage';
 function App() {
   const dispatch = useAppDispatch();
   const theme = createTheme({
@@ -48,6 +49,7 @@ function App() {
         <Route path='/' element={<></>} />
         <Route path='/landing' element={<LandingPage />} />
         <Route path='/dashboard' element={<DashboardPage/>} />
+        <Route path='/swipeCard' element={<SwipeCardPage/>} />
       </Routes>
     </ThemeProvider>
   );

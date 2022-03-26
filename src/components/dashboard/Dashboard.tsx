@@ -1,327 +1,294 @@
 import React from 'react';
-import ImageUploading, { ImageListType } from "react-images-uploading";
+import { getinterestList, setinterestList } from 'modules/interests';
+
+import NavBar from 'components/navBar/NavBar';
+import { PageName } from 'types';
 import {
   Container,
   Grid,
   TextField,
-  InputLabel,
-  MenuItem,
-  Select,
+  DialogActions,
+  Autocomplete,
   Radio,
   RadioGroup,
   FormControlLabel,
   FormControl,
   FormLabel,
   Button,
+  Backdrop,
+  CircularProgress,
 } from '@mui/material';
 import db from '../../db';
 import { collection, addDoc } from 'firebase/firestore';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { UserData } from 'types';
-import { auth } from 'db';
-import { getLoggedInUser } from 'db/repository/user';
+import { UserSaveFormData } from 'types';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { getAllInterests, setInterest } from 'db/repository/interests';
 type UserProfileFormData = {
-  fname: string;
-  lastname: string;
-  dispalyname: string;
+  firstName: string;
+  lastName: string;
+  dispalyName: string;
   age: number;
   gender: string;
   interest: string;
   description: string;
+  photoUrl: any;
 };
 
 function Dashboard() {
-  const [images, setImages] = React.useState([]);
-  const [user, setUser] = useState<UserData>();
-  const maxNumber = 69;
   const { control, reset, handleSubmit } = useForm<UserProfileFormData>();
   const userRef = collection(db, 'users');
-  const onChange = (
-    imageList: ImageListType,
-    addUpdateIndex: number[] | undefined
-  ) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList as never[]);
-  };
+  const interestList = useAppSelector(getinterestList);
+  const dispatch = useAppDispatch();
+  const [backdrop, setBackdrop] = useState(false);
+  const [interesrValues, setInterestValue] = useState('');
   useEffect(() => {
-    const getUser = async () => {
-      const currentUser = auth.currentUser || { uid: '' };
-       const user = await getLoggedInUser({
-        uid: currentUser.uid,
-        email: '',
-        photoURL: '',
-        firstName: '',
-        lastName: '',
-        displayname: '',
-        age: 0,
+    if (interestList.length <= 0) {
+      const updateInterestList = async () => {
+        const data = await getAllInterests();
+        dispatch(setinterestList(data));
+      };
+      updateInterestList().catch((err) => {
+        console.error(err);
       });
-      setUser(user);
-    };
-    getUser();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [values] = useState<UserData>({
+  const [values, setValues] = useState<UserSaveFormData>({
     interests: [],
     firstName:'',
     description: '',
     lastName: '',
-    displayname: '',
+    dispalyName: '',
     age: 0,
     gender:'',
     email:'',
-    photoURL: ''
-    
+    photoURL: '',
   });
-  
-  const getAges = (min: number) => {
-    const ages: number[] = [];
-    for (var i = 0; i <= 10; i++) {
-      ages.push(min + i);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.type === 'radio') {
+      setValues({
+...values,
+ 'gender' : e.target.value,
+      });
     }
-    return ages;
-  };
-  console.log(auth.currentUser);
+    else{
+    setValues({
+      ...values,
+      [e.target.id]: e.target.value,
+    });
+  }
   
-  const onSubmit = handleSubmit(async (data) => {
+  };
+  
+
+  const onSubmit = handleSubmit(async () => {
+
+  let interest  = await setInterest(interesrValues);
     const addValues = {
       ...values,
-    };
-    data.fname = user?.firstName || data.fname;
-    data.lastname = user?.lastName || data.lastname;
-    data.dispalyname = user?.displayname || data.dispalyname;
-    data.age = user?.age || data.age;
-    data.gender =  user?.gender || data.gender || '';
-    data.interest = user?.interests[0] || data.interest || '';
+      };
+      setBackdrop(true);
+    const newGroupData: UserSaveFormData = {
+      firstName : addValues.firstName,
+      lastName : addValues.lastName,
+      dispalyName : addValues.dispalyName,
+      gender : addValues.gender,
+      age: addValues.age,
+      photoURL: addValues.photoURL,
+      interests : [interest],
+      email : '',
+      description : addValues.description,
+      
+        };
+        
+    await addDoc(userRef, newGroupData);
+    setBackdrop(false);
     reset();
-    await addDoc(userRef, addValues);
   });
   
   return (
     <div className="Dashboard">
-     
-      <ImageUploading
-        multiple
-        value={images}
-        onChange={onChange}
-        maxNumber={maxNumber}
-        dataURLKey="data_url"
-      >
-        {({
-          imageList,
-          onImageUpload,
-          onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps,
-        }) => (
-          // write your building UI
-          <div className="upload__image-wrapper">
-            <button
-              style={isDragging ? { color: 'red' } : undefined}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              Click or Drop here
-            </button>
-            
-            
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image['data_url']} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </ImageUploading>
-      
+      <NavBar selectedName={PageName.DASHBOARD} />
       <form id='userForm' onSubmit={onSubmit}>
-      <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={4}>
-              <Grid item xs={4} >
-              <FormControl fullWidth>
-                  <Controller
-                    name='fname'
-                    control={control}
-                    render={({ field: { name, value, onChange } }) => (
-                      <TextField
-                        id='fname'
-                        label='First Name'
-                        variant='standard'
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        required
-                      />
-                    )}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={4} >
-              <FormControl fullWidth>
-                  <Controller
-                    name='lastname'
-                    control={control}
-                    render={({ field: { name, value, onChange } }) => (
-                      <TextField
-                        id='lastname'
-                        label='Last Name'
-                        variant='standard'
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        required
-                      />
-                    )}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={4} >
-              <FormControl fullWidth>
-                  <Controller
-                    name='dispalyname'
-                    control={control}
-                    render={({ field: { name, value, onChange } }) => (
-                      <TextField
-                        id='dispalyname'
-                        label='Display Name'
-                        variant='standard'
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        required
-                      />
-                    )}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={4} >
-                <FormControl fullWidth>
-                  <InputLabel id='age-label'>Age</InputLabel>
-                  <Controller
-                    name='age'
-                    control={control}
-                    render={({ field: { name, value, onChange } }) => (
-                      <Select
-                        id='age'
-                        labelId='age-label'
-                        type='number'
-                        label='Age'
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        defaultValue={user?.age}
-                        required
-                      >
-                        {user &&
-                          getAges(user.age).map((r) => (
-                            <MenuItem value={r}>{r}</MenuItem>
-                          ))}
-                      </Select>
-                    )}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={5} >
-                <FormControl fullWidth>
-                  <FormLabel id='gender-label'>Gender</FormLabel>
-                  <Controller
-                    name='gender'
-                    control={control}
-                    render={({ field: { name, value, onChange } }) => (
-                      <RadioGroup
-                        row
-                        aria-labelledby='gender-label'
-                        id='gender'
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        defaultValue={user?.gender}
-                      >
-                        <FormControlLabel
-                          value='female'
-                          control={<Radio />}
-                          label='Female'
-                          disabled={user?.gender === 'male'}
-                        />
-                        <FormControlLabel
-                          value='male'
-                          control={<Radio />}
-                          label='Male'
-                          disabled={user?.gender === 'female'}
-                        />
-                        <FormControlLabel
-                          value='both'
-                          control={<Radio />}
-                          label='Both'
-                        />
-                      </RadioGroup>
-                    )}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={7}>
-                <FormControl fullWidth>
-                  <InputLabel id='interest-label'>Interest</InputLabel>
-                  <Controller
-                    name='interest'
-                    control={control}
-                    render={({ field: { name, value, onChange } }) => (
-                      <Select
-                        labelId='interest-label'
-                        id='interest'
-                        type='number'
-                        label='Interest'
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        defaultValue={"Select"}
-                        required
-                      >
-                        {user &&
-                          user.interests.map((interest) => (
-                            <MenuItem value={interest}>{interest}</MenuItem>
-                          ))}
-                      </Select>
-                    )}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <Controller
-                    name='description'
-                    control={control}
-                    render={({ field: { name, value, onChange } }) => (
-                      <TextField
-                        id='description'
-                        label='Description'
-                        multiline
-                        rows={2}
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                </FormControl>
-              </Grid>
+
+        <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
+          
+          <Grid container spacing={4}>
+
+
+            <Grid item xs={4} >
+            <FormControl fullWidth>
+            <Controller
+            name='firstName'
+            control={control}
+            render={({ field: { name, value, onChange } }) => (
+              <TextField
+                id='firstName'
+                label='First Name'
+                name={name}
+                value={value}
+                type='input'
+                fullWidth
+                variant='standard'
+                onChange={handleChange}
+              />
+              )}
+              />
+</FormControl> 
             </Grid>
-            
-          </Container>
-          <Button variant='contained' type='submit' form='userForm'>
+            <Grid item xs={4} >
+            <FormControl fullWidth>
+            <Controller
+            name='lastName'
+            control={control}
+            render={({ field: { name, value, onChange } }) => (
+              <TextField
+                id='lastName'
+                label='Last Name'
+                variant='standard'
+                value={value}
+                name={name}
+                type='input'
+                onChange={handleChange}
+
+                required
+              />
+              )}
+              />
+</FormControl>
+            </Grid>
+            <Grid item xs={4} >
+              <FormControl fullWidth>
+                <Controller
+                  name='dispalyName'
+                  control={control}
+                  render={({ field: { name, value, onChange } }) => (
+                    <TextField
+                      id='dispalyName'
+                      label='Display Name'
+                      variant='standard'
+                      name={name}
+                      value={value}
+                      onChange={handleChange}
+                      required
+                    />
+                  )}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={4} >
+              <FormControl fullWidth>
+                <Controller
+                  name='age'
+                  control={control}
+                  render={({ field: { name, value, onChange } }) => (
+                    <TextField id="age"
+                      label='Age'
+                      type="number"
+                      InputProps={{ inputProps: { min: "18", max: "45", step: "1" } }}
+                      variant="standard"
+                      onChange={handleChange}
+                      name={name}
+                      value={value}
+                      required
+                    />
+
+                  )}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={5} >
+              <FormControl fullWidth>
+                <FormLabel id='gender-label'>Gender</FormLabel>
+                <Controller
+                  name='gender'
+                  control={control}
+                  render={({ field: { name, value, onChange } }) => (
+                    <RadioGroup
+                      row
+                      aria-labelledby='gender-label'
+                      id='gender'
+                      name={name}
+                      value={value}
+                      onChange={handleChange}
+
+                    >
+                      <FormControlLabel
+                        value='female'
+                        control={<Radio />}
+                        label='Female'
+
+                      />
+                      <FormControlLabel
+                        value='male'
+                        control={<Radio />}
+                        label='Male'
+
+                      />
+                      <FormControlLabel
+                        value='both'
+                        control={<Radio />}
+                        label='Both'
+                      />
+                    </RadioGroup>
+                  )}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={4} >
+              <Autocomplete
+                freeSolo
+                id='interest-combo-box'
+                onInputChange={(event, newValue: string) => {
+                  setInterestValue(newValue);
+                }}
+                options={interestList}
+                renderInput={(params) => (
+                  <TextField {...params} label='Interests' />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+                <Controller
+                  name='description'
+                  control={control}
+                  render={({ field: { name, value, onChange } }) => (
+                    <TextField
+                      id='description'
+                      label='Description'
+                      multiline
+                      rows={2}
+                      name={name}
+                      value={value}
+                      onChange={handleChange}
+                    />
+                  )}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+
+        </Container>
+        <DialogActions>
+        <Button variant='contained' type='submit' form='userForm'>
           Submit
         </Button>
         <Button variant='contained' onClick={() => reset()}>
           Cancel
         </Button>
+        </DialogActions>
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000 }}
+        open={backdrop}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
       </form>
-      
-      </div>     
+
+    </div>
   );
 }
 

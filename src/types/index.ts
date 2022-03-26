@@ -2,6 +2,7 @@ export enum PageName {
     LANDING = '',
     SIGIN = '',
     DASHBOARD = 'User Profile', 
+    SWIPRCARD = 'Swipe Card',
     
 }
 declare module '@mui/material/styles' {
@@ -25,3 +26,16 @@ export type UserData = {
     interests: string[];
     description: string;
 } | null;
+
+export interface UserSaveFormData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    photoURL: string;
+    gender: string;
+    age: number;
+    dispalyName: string;
+    interests: string[];
+    description: string;
+    
+}

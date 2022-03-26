@@ -1,13 +1,12 @@
 import React from 'react';
 import Dashboard from 'components/dashboard/Dashboard';
 import { Box, Toolbar } from '@mui/material';
-import NavBar from 'components/navBar/NavBar';
-import { PageName } from 'types';
+
 function DashboardPage() {
   
   return (
     <Box sx={{ display: 'flex' }}>
-      <NavBar selectedName={PageName.DASHBOARD} />
+      
       <Box
         component='main'
         sx={{
@@ -20,8 +19,8 @@ function DashboardPage() {
           overflow: 'auto',
         }}
       >
-        <Toolbar />
-        <Dashboard/>
+         <Toolbar />
+        <Dashboard />
       </Box>
     </Box>
   );
