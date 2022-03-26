@@ -1,5 +1,8 @@
 import React from 'react';
 import { getinterestList, setinterestList } from 'modules/interests';
+
+import NavBar from 'components/navBar/NavBar';
+import { PageName } from 'types';
 import {
   Container,
   Grid,
@@ -107,6 +110,7 @@ function Dashboard() {
   
   return (
     <div className="Dashboard">
+      <NavBar selectedName={PageName.DASHBOARD} />
       <form id='userForm' onSubmit={onSubmit}>
 
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
