@@ -31,9 +31,7 @@ type UserProfileFormData = {
 };
 
 function Dashboard() {
-  
   const [user, setUser] = useState<UserData>();
-  const maxNumber = 69;
   const { control, reset, handleSubmit } = useForm<UserProfileFormData>();
   const userRef = collection(db, 'users');
   useEffect(() => {
