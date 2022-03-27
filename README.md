@@ -39,6 +39,8 @@
 
 # Sprint Review
 
+https://kennesawedu-my.sharepoint.com/:v:/g/personal/mgouni_students_kennesaw_edu/Ec6H9W8WC0xMqRyjcGSMSq4BXOxB5Oz0ArTHZjHsGAR2Ew
+
 # Working Prototype
 
 https://emergingswe-bd158.web.app/
