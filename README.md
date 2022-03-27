@@ -22,7 +22,7 @@
  
  As a user, I can swipe the profiles  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;8
  
-  # Jira Product backlog
+# Jira Product backlog
   https://swe6763.atlassian.net/jira/software/projects/SPS/boards/4/backlog
   
 #  Sprint Burndown Chart
@@ -39,7 +39,7 @@
 
 # Sprint Review
 
-https://kennesawedu-my.sharepoint.com/:v:/g/personal/mgouni_students_kennesaw_edu/Ec6H9W8WC0xMqRyjcGSMSq4BXOxB5Oz0ArTHZjHsGAR2Ew
+https://user-images.githubusercontent.com/99055144/160291721-26d33b78-5a33-4a7e-8bbf-580b8fe4b585.mp4
 
 # Working Prototype
 
