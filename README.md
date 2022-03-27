@@ -44,3 +44,7 @@ https://user-images.githubusercontent.com/99055144/160291721-26d33b78-5a33-4a7e-
 # Working Prototype
 
 https://emergingswe-bd158.web.app/
+
+# Demo of Sprint 1 stories
+https://vimeo.com/692832419/ebe46aa023
+
