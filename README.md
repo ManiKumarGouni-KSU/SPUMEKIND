@@ -35,6 +35,8 @@
 
 # Mob Programming
 
+![Sprint 1- Mob Programming](https://user-images.githubusercontent.com/99055144/160290974-c30de5b1-6cd6-4ecb-bd5e-e0ba82b387fa.png)
+
 # Sprint Review
 
 # Working Prototype
