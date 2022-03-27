@@ -31,6 +31,8 @@
 
 # Daily Scrums
 
+[Sprint 1 -  SWE 6733 EMERGING SOFTWARE ENGINEERING PROCESS.xlsx](https://github.com/ManiKumarGouni-KSU/SPUMEKIND/files/8358013/Sprint.1.-.SWE.6733.EMERGING.SOFTWARE.ENGINEERING.PROCESS.xlsx)
+
 # Mob Programming
 
 # Sprint Review
