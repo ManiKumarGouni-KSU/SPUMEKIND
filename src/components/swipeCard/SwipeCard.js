@@ -81,8 +81,7 @@ function SwipeCard () {
 
   return (
     <div>
-      
-      <h1>Swipe here</h1>
+      <h1>Match A Profile</h1>
       <div className='cardContainer'>
         {db.map((character, index) => (
           <TinderCard
