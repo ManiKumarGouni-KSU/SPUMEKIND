@@ -101,13 +101,13 @@ function SwipeCard () {
           </TinderCard>
         ))}
       </div>
-      <div className='buttons'>
+      {/* <div className='buttons'>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
         <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => navigate(`/dashboard`)}>Home</button>
-      </div>
-      {lastDirection ? (
+      </div> */}
+      {/* {lastDirection ? (
         <h2 key={lastDirection} className='infoText'>
           You swiped {lastDirection}
         </h2>
@@ -115,7 +115,7 @@ function SwipeCard () {
         <h2 className='infoText'>
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
-      )}
+      )} */}
     </div>
   )
 }
