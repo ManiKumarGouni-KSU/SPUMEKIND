@@ -3,6 +3,7 @@ import React, { useState, useMemo, useRef } from 'react'
 import TinderCard from 'react-tinder-card'
 import  './swipeMatchCard.css';
 import { useNavigate } from 'react-router-dom';
+import ProfileCard from './ProfileCard';
 const db = [
   {
     name: 'Richard Hendricks',
@@ -81,7 +82,7 @@ function SwipeCard () {
 
   return (
     <div>
-      <h1>Match A Profile</h1>
+      <h1>LovelyMeet</h1>
       <div className='cardContainer'>
         {db.map((character, index) => (
           <TinderCard
@@ -93,10 +94,10 @@ function SwipeCard () {
           >
             <div
               style={{ backgroundImage: 'url(' + character.url + ')' }}
-              className='card'
-            >
-              <h3>{character.name}</h3>
+              className='card'>
+             <h3>{character.name}</h3>
             </div>
+            
           </TinderCard>
         ))}
       </div>
