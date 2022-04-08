@@ -5,11 +5,13 @@ import { signOutUser } from 'db/repository/auth';
 
 function Profile() {
   const currentUser = auth.currentUser;
+  console.log(currentUser?.photoURL);
   const [photoURL, setPhotoURL] = useState('/anonymous_user_avatar.png');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleAvatarClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(event.currentTarget.id);
     setAnchorEl(event.currentTarget);
   };
 

@@ -1,8 +1,6 @@
 import React from 'react';
 import { getinterestList, setinterestList } from 'modules/interests';
-
-import NavBar from 'components/navBar/NavBar';
-import { PageName } from 'types';
+import AvatarUpload from 'components/AvatarUpload';
 import {
   Container,
   Grid,
@@ -25,6 +23,7 @@ import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
+import { auth } from 'db';
 type UserProfileFormData = {
   firstName: string;
   lastName: string;
@@ -43,6 +42,8 @@ function Dashboard() {
   const dispatch = useAppDispatch();
   const [backdrop, setBackdrop] = useState(false);
   const [interesrValues, setInterestValue] = useState('');
+  const currentUser = auth.currentUser;
+  console.log(currentUser?.uid);
   useEffect(() => {
     if (interestList.length <= 0) {
       const updateInterestList = async () => {
@@ -52,6 +53,7 @@ function Dashboard() {
       updateInterestList().catch((err) => {
         console.error(err);
       });
+      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -67,6 +69,7 @@ function Dashboard() {
     photoURL: '',
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
     if (e.target.type === 'radio') {
       setValues({
 ...values,
@@ -84,7 +87,7 @@ function Dashboard() {
   
 
   const onSubmit = handleSubmit(async () => {
-
+   
   let interest  = await setInterest(interesrValues);
     const addValues = {
       ...values,
@@ -105,19 +108,17 @@ function Dashboard() {
         
     await addDoc(userRef, newGroupData);
     setBackdrop(false);
+    alert('user data saved successfully!');
     reset();
   });
   
   return (
     <div className="Dashboard">
-      <NavBar selectedName={PageName.DASHBOARD} />
+     
       <form id='userForm' onSubmit={onSubmit}>
-
+      < AvatarUpload/>
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
-          
           <Grid container spacing={4}>
-
-
             <Grid item xs={4} >
             <FormControl fullWidth>
             <Controller
