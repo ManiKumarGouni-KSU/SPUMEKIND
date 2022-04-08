@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import  './swipeMatchCard.css';
 import TinderCard from 'react-tinder-card';
 
 
 
 function SwipeCard() {
-  const [people, setPeople] = useState([])
   const dbs = [
     {
       name: 'Richard Hendricks',
