@@ -1,8 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
-// import TinderCard from '../react-tinder-card/index'
 import TinderCard from 'react-tinder-card'
 import  './swipeMatchCard.css';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 const db = [
   {
     name: 'Richard Hendricks',
@@ -27,7 +26,7 @@ const db = [
 ]
 
 function SwipeCard () {
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
   // used for outOfFrame closure
@@ -46,14 +45,15 @@ function SwipeCard () {
     currentIndexRef.current = val
   }
 
-  const canGoBack = currentIndex < db.length - 1
+ // const canGoBack = currentIndex < db.length - 1
 
-  const canSwipe = currentIndex >= 0
+ // const canSwipe = currentIndex >= 0
 
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index) => {
-    setLastDirection(direction)
-    updateCurrentIndex(index - 1)
+    setLastDirection(direction);
+    updateCurrentIndex(index - 1);
+    console.log(lastDirection);
   }
 
   const outOfFrame = (name, idx) => {
@@ -65,24 +65,23 @@ function SwipeCard () {
     // during latest swipes. Only the last outOfFrame event should be considered valid
   }
 
-  const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
-      await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
-    }
-  }
+  // const swipe = async (dir) => {
+  //   if (canSwipe && currentIndex < db.length) {
+  //     await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+  //   }
+  // }
 
   // increase current index and show card
-  const goBack = async () => {
-    if (!canGoBack) return
-    const newIndex = currentIndex + 1
-    updateCurrentIndex(newIndex)
-    await childRefs[newIndex].current.restoreCard()
-  }
+  // const goBack = async () => {
+  //   if (!canGoBack) return
+  //   const newIndex = currentIndex + 1
+  //   updateCurrentIndex(newIndex)
+  //   await childRefs[newIndex].current.restoreCard()
+  // }
 
   return (
     <div>
-      
-      <h1>Swipe here</h1>
+      <h1>LovelyMeet</h1>
       <div className='cardContainer'>
         {db.map((character, index) => (
           <TinderCard
@@ -94,20 +93,20 @@ function SwipeCard () {
           >
             <div
               style={{ backgroundImage: 'url(' + character.url + ')' }}
-              className='card'
-            >
-              <h3>{character.name}</h3>
+              className='card'>
+             <h3>{character.name}</h3>
             </div>
+            
           </TinderCard>
         ))}
       </div>
-      <div className='buttons'>
+      {/* <div className='buttons'>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
         <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => navigate(`/dashboard`)}>Home</button>
-      </div>
-      {lastDirection ? (
+      </div> */}
+      {/* {lastDirection ? (
         <h2 key={lastDirection} className='infoText'>
           You swiped {lastDirection}
         </h2>
@@ -115,7 +114,7 @@ function SwipeCard () {
         <h2 className='infoText'>
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
-      )}
+      )} */}
     </div>
   )
 }

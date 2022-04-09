@@ -34,7 +34,7 @@ describe('Firestore Database testing suite', () => {
   test("Can't create interest collection without auth", async () => {
     const db = getFirestore(null);
     const testDoc = db.collection("interests").doc("Testing");
-    await firebase.assertSucceeds(testDoc.set({ label: "Testing" }));
+    await firebase.assertFails(testDoc.set({ label: "Testing" }));
   });
 
   test("Can create interest collection with auth", async () => {
@@ -57,7 +57,7 @@ describe('Firestore Database testing suite', () => {
     const db = getFirestore(myAuth);
     const interestId = "Testing";
     const deleteDoc = db.collection("interests").doc(interestId);
-    await firebase.assertSucceeds(deleteDoc.delete());
+    await firebase.assertFails(deleteDoc.delete());
   });
 
   test('Fail to Update interest collection', async () => {
@@ -72,16 +72,11 @@ describe('Firestore Database testing suite', () => {
     const testDoc = db.collection("users").doc(myId);
     await firebase.assertSucceeds(testDoc.set(myUserDoc));
   });
-  test("Can write to a user document with the other ID as our user", async () => {
-    const db = getFirestore(myAuth);
-    const testDoc = db.collection("users").doc(myId);
-    await firebase.assertSucceeds(testDoc.set(myUserDoc));
-  });
 
   test("Can't write to a user document with the same ID as our user", async () => {
     const db = getFirestore(myAuth);
     const testDoc = db.collection("users").doc(theirId);
-    await firebase.assertSucceeds(testDoc.set(myUserDoc));
+    await firebase.assertFails(testDoc.set(myUserDoc));
   });
 
   test("Create user profile", async () => {
@@ -93,12 +88,5 @@ describe('Firestore Database testing suite', () => {
     await firebase.assertSucceeds(testRead.get());
   });
 
-  test('can not update own messages', async () => {
-    const db = getFirestore(myAuth);
-    const admin = getAdminFirestore();
-    const doc = admin.collection('users').doc('abc123');
-    await doc.set({ uid: myAuth.uid });
-    const testDoc = db.collection('users').doc('abc123');
-    await firebase.assertSucceeds(testDoc.set({ foo: 'bar' }));
-  });
+  
 });

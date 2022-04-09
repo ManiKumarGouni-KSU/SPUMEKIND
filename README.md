@@ -3,19 +3,48 @@
 # Team SPUMEKIND
         Name                        Role
         
-  Mani Kumar Gouni              Scrum Master
+  Mani Kumar Gouni &emsp; &emsp; &emsp;Scrum Master
   
-  Deepthi Pottipally            Product Owner
+  Deepthi Pottipally &emsp; &emsp; &emsp;Product Owner
   
-  Sputnika Madhavaram           Tech Lead
+  Sputnika Madhavaram &emsp; &emsp; &emsp;Tech Lead
   
-  Kinjal Rabari                 Developer
   
-  # Product Vision
-  Our product vision is to make this application the favorite place for all 18-year-olds to meet and spend time with each other, rather than just use the app to hook up.
-  
-  # Jira Product backlog
+# Sprint1 Userstories and Forecasted Points(29 Points)
+ 
+ Userstory&emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;Story Points
+ 
+ As a user I want to use SSO login &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;8  
+ 
+ Configure firestore database and create tables &emsp; &emsp; &emsp; &emsp;5  
+ 
+ As a user, I want create profile successfully after signup  &emsp; &emsp;8
+ 
+ As a user, I can swipe the profiles  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;8
+ 
+# Jira Product backlog
   https://swe6763.atlassian.net/jira/software/projects/SPS/boards/4/backlog
   
-  # Backlog order rationale
-  We ordered our backlog based on the Product owner's view on what is considered the most important features.
+#  Sprint Burndown Chart
+
+![image](https://user-images.githubusercontent.com/99055144/160249134-532144fb-1bb8-4c40-9b35-586472941147.png)
+
+# Daily Scrums
+
+[Sprint 1 -  SWE 6733 EMERGING SOFTWARE ENGINEERING PROCESS.xlsx](https://github.com/ManiKumarGouni-KSU/SPUMEKIND/files/8358013/Sprint.1.-.SWE.6733.EMERGING.SOFTWARE.ENGINEERING.PROCESS.xlsx)
+
+# Mob Programming
+
+![Sprint 1- Mob Programming](https://user-images.githubusercontent.com/99055144/160290974-c30de5b1-6cd6-4ecb-bd5e-e0ba82b387fa.png)
+
+# Sprint Review
+
+https://user-images.githubusercontent.com/99055144/160291721-26d33b78-5a33-4a7e-8bbf-580b8fe4b585.mp4
+
+# Working Prototype
+
+https://emergingswe-bd158.web.app/
+
+# Demo of Sprint 1 stories
+https://vimeo.com/692832419/ebe46aa023
+
