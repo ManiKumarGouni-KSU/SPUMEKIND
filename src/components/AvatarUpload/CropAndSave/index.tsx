@@ -90,7 +90,7 @@ const SelectedImageComponent = ({
           aria-label='Slider'
         />
         <SaveButtonWrapper>
-          <Button onClick={handleSaveButtonClick}>Save</Button>
+          <Button onClick={handleSaveButtonClick}>Upload</Button>
         </SaveButtonWrapper>
       </CropArea>
       <XIconArea>

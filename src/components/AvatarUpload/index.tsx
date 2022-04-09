@@ -6,9 +6,8 @@ import SelectedImageComponent from './CropAndSave';
 import SavedImage from './SavedImage';
 import UploadFailed from './UploadFailed';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import {Backdrop, CircularProgress} from '@mui/material';
+import {addData} from 'components/dashboard/Dashboard';
 interface WrapperProps {
   isErrored: boolean;
   isSaved: boolean;
@@ -59,8 +58,8 @@ const Home = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [zoomLevel, setZoomlevel] = useState(1);
   const storage = getStorage();
-  const db = getFirestore();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [backdrop, setBackdrop] = useState(false);
   const onClickContainer = () => {
     inputRef.current?.click();
   };
@@ -94,6 +93,7 @@ const Home = () => {
 console.log(selectedFile);
 const storageRef = ref(storage, selectedFile.name);
 const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+setBackdrop(true);
 uploadTask.on('state_changed', 
   (snapshot) => {
     // Observe state change events such as progress, pause, and resume
@@ -116,33 +116,14 @@ uploadTask.on('state_changed',
     // Handle successful uploads on complete
     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      console.log('File available at', downloadURL);
+      setBackdrop(false);
       addData(downloadURL);
     });
   }
 );
     updateStatesOnChange(selectedFile);
   };
-  async function addData(result: string) {
-    const auth = getAuth();
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        const dbRef = doc(db, "users", uid);
-        await updateDoc(dbRef, {
-          photoURL : result
-        });
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
-
-
-  } 
+  
   const handleSliderChange = (
     event: React.ChangeEvent<unknown>,
     value: number | number[]
@@ -209,7 +190,14 @@ uploadTask.on('state_changed',
       onDragLeave={dragLeave}
     >
       {renderChild()}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000 }}
+        open={backdrop}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
     </Wrapper>
+    
   );
 };
 

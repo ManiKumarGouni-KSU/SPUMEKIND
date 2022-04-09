@@ -23,7 +23,7 @@ import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
-import { auth } from 'db';
+let photourlString: string;
 type UserProfileFormData = {
   firstName: string;
   lastName: string;
@@ -35,6 +35,9 @@ type UserProfileFormData = {
   photoUrl: any;
 };
 
+export async function addData(result: string) {
+  photourlString = result;
+}
 function Dashboard() {
   const { control, reset, handleSubmit } = useForm<UserProfileFormData>();
   const userRef = collection(db, 'users');
@@ -42,8 +45,6 @@ function Dashboard() {
   const dispatch = useAppDispatch();
   const [backdrop, setBackdrop] = useState(false);
   const [interesrValues, setInterestValue] = useState('');
-  const currentUser = auth.currentUser;
-  console.log(currentUser?.uid);
   useEffect(() => {
     if (interestList.length <= 0) {
       const updateInterestList = async () => {
@@ -69,7 +70,6 @@ function Dashboard() {
     photoURL: '',
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     if (e.target.type === 'radio') {
       setValues({
 ...values,
@@ -84,8 +84,6 @@ function Dashboard() {
   }
   
   };
-  
-
   const onSubmit = handleSubmit(async () => {
    
   let interest  = await setInterest(interesrValues);
@@ -99,7 +97,7 @@ function Dashboard() {
       dispalyName : addValues.dispalyName,
       gender : addValues.gender,
       age: addValues.age,
-      photoURL: addValues.photoURL,
+      photoURL: photourlString,
       interests : [interest],
       email : '',
       description : addValues.description,
