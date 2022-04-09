@@ -55,7 +55,7 @@ const ImageComponent = ({ error, file, imgRef, ...props }: ImageProps) => {
     if (file) {
       setmemoizedUrl(URL.createObjectURL(file));
     }
-  }, []);
+  }, [file]);
 
   return (
     <Wrapper {...props}>

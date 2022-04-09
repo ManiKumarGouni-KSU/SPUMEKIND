@@ -18,11 +18,14 @@ const SavedImage = ({
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const setZoomLevel = async () => {
     imgRef.current?.style.setProperty(
       'transform',
       `scale(${1 + zoomLevel / 10})`
     );
-  }, []);
+  };
+  setZoomLevel();
+  }, [zoomLevel]);
 
   return (
     <div className='content-wrapper'>
