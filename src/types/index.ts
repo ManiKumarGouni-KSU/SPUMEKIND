@@ -37,5 +37,6 @@ export interface UserSaveFormData {
     dispalyName: string;
     interests: string[];
     description: string;
+    levelOfExperience: number[];
     
 }

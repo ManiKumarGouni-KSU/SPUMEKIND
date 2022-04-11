@@ -2,7 +2,7 @@ import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { auth } from 'db';
 import { signOutUser } from 'db/repository/auth';
-
+import {deleteUser } from 'db/repository/user';
 function Profile() {
   const currentUser = auth.currentUser;
   console.log(currentUser?.photoURL);
@@ -28,7 +28,15 @@ function Profile() {
   const handleLogout = () => {
     signOutUser();
   };
-
+  const deleteAccount = () => {
+    let  user = auth.currentUser?.uid;
+    deleteUser(user);
+    if (window.confirm('Are you sure you want to delete account')) {
+    } else {
+      setAnchorEl(null);
+      console.log('User account not deleted.');
+    }
+  };
   return (
     <>
       <IconButton
@@ -50,7 +58,7 @@ function Profile() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem onClick={handleClose}>Delete Account</MenuItem>
+        <MenuItem onClick={deleteAccount}>Delete Account</MenuItem>
       </Menu>
     </>
   );

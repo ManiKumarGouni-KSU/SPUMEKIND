@@ -33,6 +33,7 @@ type UserProfileFormData = {
   interest: string;
   description: string;
   photoUrl: any;
+  levelOfExperience: number;
 };
 
 export async function addData(result: string) {
@@ -68,6 +69,7 @@ function Dashboard() {
     gender:'',
     email:'',
     photoURL: '',
+    levelOfExperience:[]
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === 'radio') {
@@ -101,7 +103,7 @@ function Dashboard() {
       interests : [interest],
       email : '',
       description : addValues.description,
-      
+      levelOfExperience : addValues.levelOfExperience
         };
         
     await addDoc(userRef, newGroupData);
@@ -248,6 +250,27 @@ function Dashboard() {
                   <TextField {...params} label='Interests' />
                 )}
               />
+            </Grid>
+            <Grid item xs={4} >
+              <FormControl fullWidth>
+                <Controller
+                  name='levelOfExperience'
+                  control={control}
+                  render={({ field: { name, value, onChange } }) => (
+                    <TextField id="levelOfExperience"
+                      label='Level of Performance'
+                      type="number"
+                      InputProps={{ inputProps: { min: "0", max: "10", step: "1" } }}
+                      variant="standard"
+                      onChange={handleChange}
+                      name={name}
+                      value={value}
+                      required
+                    />
+
+                  )}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth>
