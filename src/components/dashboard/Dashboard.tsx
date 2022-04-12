@@ -1,8 +1,6 @@
 import React from 'react';
 import { getinterestList, setinterestList } from 'modules/interests';
-
-import NavBar from 'components/navBar/NavBar';
-import { PageName } from 'types';
+import AvatarUpload from 'components/AvatarUpload';
 import {
   Container,
   Grid,
@@ -25,6 +23,7 @@ import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
+let photourlString: string;
 type UserProfileFormData = {
   firstName: string;
   lastName: string;
@@ -34,8 +33,12 @@ type UserProfileFormData = {
   interest: string;
   description: string;
   photoUrl: any;
+  levelOfExperience: number;
 };
 
+export async function addData(result: string) {
+  photourlString = result;
+}
 function Dashboard() {
   const { control, reset, handleSubmit } = useForm<UserProfileFormData>();
   const userRef = collection(db, 'users');
@@ -52,6 +55,7 @@ function Dashboard() {
       updateInterestList().catch((err) => {
         console.error(err);
       });
+      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,6 +69,7 @@ function Dashboard() {
     gender:'',
     email:'',
     photoURL: '',
+    levelOfExperience:[]
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === 'radio') {
@@ -81,10 +86,8 @@ function Dashboard() {
   }
   
   };
-  
-
   const onSubmit = handleSubmit(async () => {
-
+   
   let interest  = await setInterest(interesrValues);
     const addValues = {
       ...values,
@@ -96,28 +99,26 @@ function Dashboard() {
       dispalyName : addValues.dispalyName,
       gender : addValues.gender,
       age: addValues.age,
-      photoURL: addValues.photoURL,
+      photoURL: photourlString,
       interests : [interest],
       email : '',
       description : addValues.description,
-      
+      levelOfExperience : addValues.levelOfExperience
         };
         
     await addDoc(userRef, newGroupData);
     setBackdrop(false);
+    alert('user data saved successfully!');
     reset();
   });
   
   return (
     <div className="Dashboard">
-      <NavBar selectedName={PageName.DASHBOARD} />
+     
       <form id='userForm' onSubmit={onSubmit}>
-
+      < AvatarUpload/>
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
-          
           <Grid container spacing={4}>
-
-
             <Grid item xs={4} >
             <FormControl fullWidth>
             <Controller
@@ -249,6 +250,27 @@ function Dashboard() {
                   <TextField {...params} label='Interests' />
                 )}
               />
+            </Grid>
+            <Grid item xs={4} >
+              <FormControl fullWidth>
+                <Controller
+                  name='levelOfExperience'
+                  control={control}
+                  render={({ field: { name, value, onChange } }) => (
+                    <TextField id="levelOfExperience"
+                      label='Level of Performance'
+                      type="number"
+                      InputProps={{ inputProps: { min: "0", max: "10", step: "1" } }}
+                      variant="standard"
+                      onChange={handleChange}
+                      name={name}
+                      value={value}
+                      required
+                    />
+
+                  )}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth>
