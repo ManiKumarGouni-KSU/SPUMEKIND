@@ -1,7 +1,11 @@
 import React, { useState, useMemo, useRef } from 'react'
 import TinderCard from 'react-tinder-card'
 import  './swipeMatchCard.css';
-//import { useNavigate } from 'react-router-dom';
+import { doc, onSnapshot } from "firebase/firestore";
+
+const unsub = onSnapshot(doc(db, "users"), (doc) => {
+  console.log("Current data: ", doc.data());
+});
 const db = [
   {
     name: 'Richard Hendricks',
@@ -31,6 +35,7 @@ function SwipeCard () {
   const [lastDirection, setLastDirection] = useState()
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
+
 
   const childRefs = useMemo(
     () =>
