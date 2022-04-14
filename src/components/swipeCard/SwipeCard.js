@@ -1,32 +1,59 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
 import  './swipeMatchCard.css';
 import TinderCard from 'react-tinder-card';
-
-
+import { doc, getDoc,onSnapshot } from "firebase/firestore";
+import db from '../../db';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { collection, query, where,getDocs } from "firebase/firestore";
 
 function SwipeCard() {
-  const dbs = [
-    {
+
+  let [interests,setInterests]=useState([]);
+  let [dbs,setDBS] = useState( [
+     {
       name: 'Richard Hendricks',
-      url: './img/richard.jpg'
+      url: './img/richard.jpg',
+      interests: interests
     },
-    {
-      name: 'Erlich Bachman',
-      url: './img/erlich.jpg'
-    },
-    {
-      name: 'Monica Hall',
-      url: './img/monica.jpg'
-    },
-    {
-      name: 'Jared Dunn',
-      url: './img/jared.jpg'
-    },
-    {
-      name: 'Dinesh Chugtai',
-      url: './img/dinesh.jpg'
-    }
   ]
+  )
+   
+  
+  useEffect(() => {
+
+  const auth = getAuth();
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const usersRef = collection(db, "users");
+      console.log("At swipe ");
+      // Create a query against the collection.
+        const q = query(usersRef, where("photoURL", "!=", ""));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          
+         // console.log("In swipe"+doc.id, " => ", doc.data());
+          setDBS(dbs=>[...dbs,{"name":doc.data().firstName,"url":doc.data().photoURL}]);
+        });
+     /*  const uid = user.uid;
+      const docRef = doc(db, "users", uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log(docSnap.data());
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      } */
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+  
+},dbs);
+console.log("outside"+dbs.length);
+  
   
   
 
@@ -38,7 +65,6 @@ function SwipeCard() {
       .join(' ')
   }
 
-  console.log('component render')
 
   return (
     <div>
