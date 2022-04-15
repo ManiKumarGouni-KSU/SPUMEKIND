@@ -3,6 +3,7 @@ export enum PageName {
     SIGIN = '',
     DASHBOARD = 'User Profile', 
     SWIPRCARD = 'Swipe Card',
+    SEARCHPROFILE = 'Search Profiles',
     
 }
 declare module '@mui/material/styles' {
@@ -25,7 +26,16 @@ export type UserData = {
     displayname: string;
     interests: string[];
     description: string;
+    levelOfExperience: number;
+    uid: string;
+    userId: string;
 } | null;
+export interface UserSearchProfiles {
+    uid: string;
+    name: string;
+    userId: string;
+    photoURL: string;
+}
 
 export interface UserSaveFormData {
     firstName: string;
@@ -38,5 +48,12 @@ export interface UserSaveFormData {
     interests: string[];
     description: string;
     levelOfExperience: number[];
+    uid: string;
     
+}
+export interface GroupSearchFormData {
+    interest: string;
+    age: number[];
+    gender: string;
+    levelOfExperience: number[];
 }

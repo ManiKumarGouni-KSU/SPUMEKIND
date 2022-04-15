@@ -37,13 +37,13 @@ function MenuListItems(props: any) {
         </ListItemIcon>
         {props.open ? <ListItemText primary='User Profile' /> : null}
       </ListItem>
-      <ListItem button onClick={() => navigate(`/swipeCard`)} sx={{ height: 50 }}>
+      <ListItem button onClick={() => navigate(``)} sx={{ height: 50 }}>
         <ListItemIcon>
           <Badge>
-            <GroupsIcon />
+            
           </Badge>
         </ListItemIcon>
-        {props.open ? <ListItemText primary='Swipe Up' /> : null}
+        {props.open ? <ListItemText primary='' /> : null}
       </ListItem>
     </div>
   );
