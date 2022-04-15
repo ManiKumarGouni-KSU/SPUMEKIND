@@ -124,7 +124,6 @@ function Dashboard() {
   
   return (
     <div className="Dashboard">
-     
       <form id='userForm' onSubmit={onSubmit}>
       < AvatarUpload />
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
