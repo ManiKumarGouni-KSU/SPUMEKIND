@@ -48,7 +48,7 @@ function SearchProfile(){
   const [criteria, setCriteria] = useState<GroupSearchFormData>({
     interest: '',
     age: [0, 45],
-    gender: 'both',
+    gender: '',
     levelOfExperience: [0, 10],
   });
   useEffect(() => {
@@ -68,21 +68,23 @@ function SearchProfile(){
     setCriteria({
       interest: user?.interests[0] ? user?.interests[0] : '',
       age: [0, 45],
-      gender: 'both',
+      gender: '',
       levelOfExperience: [0, 10],
     });
     getUser()// eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const saveMatches = async (values : UserData) => {
     const getList = await getUpdateSearchList(values?.uid);
-    let updateFlag : boolean = false;
-    getList.forEach((doc) =>{   
+    let updateFlag : boolean = true;
+    getList.forEach((doc) =>{  
+      console.log('doc?.userId ' + doc.uid); 
+      console.log('values?.userId ' + values?.userId); 
       if(doc?.userId === values?.userId){
-        updateFlag = true;
+        updateFlag = false;
       }
       });
       console.log('updateFlag ' + updateFlag);
-      if(!updateFlag){
+      if(updateFlag){
         console.log('Add values ');
       await addDoc(userRef, {
       name: values?.firstName +' '+ values?.lastName,
@@ -95,6 +97,8 @@ function SearchProfile(){
   }
   };
   const onSubmit = handleSubmit(async () => {
+    console.log(user?.interests.length + ' list of interests');
+    if(user?.interests){
     const currentUser = auth.currentUser || { uid: '' };
     if (currentUser) {
       setBackdrop(true);
@@ -116,6 +120,12 @@ function SearchProfile(){
     } else {
       alert('User is not logged in.');
     }
+  }
+  else{
+    alert(
+      'Create your profile and start search profiles'
+    );
+  }
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCriteria({
@@ -203,20 +213,21 @@ function SearchProfile(){
                     >
                       <FormControlLabel
                         value='female'
-                        control={<Radio />}
+                        control={<Radio required={true}/>}
                         label='Female'
-
+                        
                       />
                       <FormControlLabel
                         value='male'
-                        control={<Radio />}
+                        control={<Radio required={true}/>}
                         label='Male'
-
+                        
                       />
                       <FormControlLabel
                         value='both'
-                        control={<Radio />}
+                        control={<Radio required={true}/>}
                         label='Both'
+                        
                       />
                     </RadioGroup>
                   )}

@@ -36,7 +36,7 @@ export const getSearchList = async (): Promise<UserSearchProfiles[]> => {
     });
    return data as Array<UserSearchProfiles>;
    };
-  export const getUpdateSearchList = async (userId: any): Promise<UserData[]> => {
+  export const getUpdateSearchList = async (userId: any): Promise<UserSearchProfiles[]> => {
     const groupRef = collection(db, COLLENCTION_SEARCHPROFILE_NAME);
     const groupSnap = await getDocs(groupRef);
     const data: Array<any> = [];
@@ -45,6 +45,7 @@ export const getSearchList = async (): Promise<UserSearchProfiles[]> => {
         data.push({ id: _data.id, ..._data.data() });
         }
     });
-    return data as Array<UserData>;
+    console.log(data as Array<UserSearchProfiles> + ' line 48');
+    return data as Array<UserSearchProfiles>;
     
   };
