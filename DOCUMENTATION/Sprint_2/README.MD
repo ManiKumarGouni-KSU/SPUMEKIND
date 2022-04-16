@@ -25,6 +25,10 @@
 # Mob Programming
 
 
+https://user-images.githubusercontent.com/99055144/163694264-42704298-eb2a-436f-aab9-0160831da8ac.mp4
+
+
+
 # Sprint Review
 
 
