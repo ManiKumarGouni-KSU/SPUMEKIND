@@ -18,7 +18,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import Login from 'components/login/Login';
 import Profile from 'components/profile/Profile';
-import GroupsIcon from '@mui/icons-material/Groups';
 
 function MenuListItems(props: any) {
   const navigate = useNavigate();
@@ -37,13 +36,13 @@ function MenuListItems(props: any) {
         </ListItemIcon>
         {props.open ? <ListItemText primary='User Profile' /> : null}
       </ListItem>
-      <ListItem button onClick={() => navigate(`/swipeCard`)} sx={{ height: 50 }}>
+      <ListItem button onClick={() => navigate(``)} sx={{ height: 50 }}>
         <ListItemIcon>
           <Badge>
-            <GroupsIcon />
+            
           </Badge>
         </ListItemIcon>
-        {props.open ? <ListItemText primary='Swipe Up' /> : null}
+        {props.open ? <ListItemText primary='' /> : null}
       </ListItem>
     </div>
   );

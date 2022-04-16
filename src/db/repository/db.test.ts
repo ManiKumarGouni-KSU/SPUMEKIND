@@ -34,7 +34,11 @@ describe('Firestore Database testing suite', () => {
   test("Can't create interest collection without auth", async () => {
     const db = getFirestore(null);
     const testDoc = db.collection("interests").doc("Testing");
+<<<<<<< HEAD
     await firebase.assertFails(testDoc.set({ label: "Testing" }));
+=======
+    await firebase.assertSucceeds(testDoc.set({ label: "Testing" }));
+>>>>>>> 4fceeb08a5faee3ce6f44a97e2a07248fac7689b
   });
 
   test("Can create interest collection with auth", async () => {
@@ -57,7 +61,11 @@ describe('Firestore Database testing suite', () => {
     const db = getFirestore(myAuth);
     const interestId = "Testing";
     const deleteDoc = db.collection("interests").doc(interestId);
+<<<<<<< HEAD
     await firebase.assertFails(deleteDoc.delete());
+=======
+    await firebase.assertSucceeds(deleteDoc.delete());
+>>>>>>> 4fceeb08a5faee3ce6f44a97e2a07248fac7689b
   });
 
   test('Fail to Update interest collection', async () => {
@@ -72,11 +80,23 @@ describe('Firestore Database testing suite', () => {
     const testDoc = db.collection("users").doc(myId);
     await firebase.assertSucceeds(testDoc.set(myUserDoc));
   });
+<<<<<<< HEAD
+=======
+  test("Can write to a user document with the other ID as our user", async () => {
+    const db = getFirestore(myAuth);
+    const testDoc = db.collection("users").doc(myId);
+    await firebase.assertSucceeds(testDoc.set(myUserDoc));
+  });
+>>>>>>> 4fceeb08a5faee3ce6f44a97e2a07248fac7689b
 
   test("Can't write to a user document with the same ID as our user", async () => {
     const db = getFirestore(myAuth);
     const testDoc = db.collection("users").doc(theirId);
+<<<<<<< HEAD
     await firebase.assertFails(testDoc.set(myUserDoc));
+=======
+    await firebase.assertSucceeds(testDoc.set(myUserDoc));
+>>>>>>> 4fceeb08a5faee3ce6f44a97e2a07248fac7689b
   });
 
   test("Create user profile", async () => {
@@ -88,5 +108,16 @@ describe('Firestore Database testing suite', () => {
     await firebase.assertSucceeds(testRead.get());
   });
 
+<<<<<<< HEAD
   
+=======
+  test('can not update own messages', async () => {
+    const db = getFirestore(myAuth);
+    const admin = getAdminFirestore();
+    const doc = admin.collection('users').doc('abc123');
+    await doc.set({ uid: myAuth.uid });
+    const testDoc = db.collection('users').doc('abc123');
+    await firebase.assertSucceeds(testDoc.set({ foo: 'bar' }));
+  });
+>>>>>>> 4fceeb08a5faee3ce6f44a97e2a07248fac7689b
 });
