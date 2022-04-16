@@ -7,8 +7,9 @@ import { onAuthChange } from 'db/repository/auth';
 import LandingPage from 'pages/LandingPage';
 import { setUser } from 'modules/user';
 import { useAppDispatch } from 'hooks';
-
-
+import { getLoggedInUser } from 'db/repository/user';
+import DashboardPage from 'pages/DashboardPage';
+import SwipeCardPage from 'pages/SwipeCardPage';
 function App() {
   const dispatch = useAppDispatch();
   const theme = createTheme({
@@ -30,10 +31,13 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
     onAuthChange(async (user: any) => {
-       
+      if (user) {
+        navigate('/dashboard');
+        dispatch(setUser(await getLoggedInUser(user)));
+      } else {
         navigate('/landing');
         dispatch(setUser(null));
-      
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -44,7 +48,8 @@ function App() {
       <Routes>
         <Route path='/' element={<></>} />
         <Route path='/landing' element={<LandingPage />} />
-        <Route path='/dashboard' element={<></>} />
+        <Route path='/dashboard' element={<DashboardPage/>} />
+        <Route path='/swipeCard' element={<SwipeCardPage/>} />
       </Routes>
     </ThemeProvider>
   );
