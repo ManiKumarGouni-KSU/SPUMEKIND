@@ -31,8 +31,8 @@ function SwipeCard() {
   
 
   //make the first lettr of each person capital
-  const capitalizeFirstLetter= (string)=> {
-    return string
+  const capitalizeFirstLetter= (value: string)=> {
+    return value
       .split(' ')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')
