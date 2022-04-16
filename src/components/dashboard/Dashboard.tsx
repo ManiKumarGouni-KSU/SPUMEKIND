@@ -93,7 +93,7 @@ function Dashboard() {
   
   };
   const onSubmit = handleSubmit(async () => {
-   
+    if(photourlString !== undefined){
   let interest  = await setInterest(interesrValues);
     const addValues = {
       ...values,
@@ -114,12 +114,15 @@ function Dashboard() {
       email : auth.currentUser?.email,
       description : addValues.description,
       levelOfExperience : addValues.levelOfExperience,
-      userId: currentUser.uid,
       });
+      
     setBackdrop(false);
     alert('user data saved successfully!');
     reset();
     navigate(`/searchProfile`);
+    } else {
+alert('Upload image');
+    }
   });
   
   return (
@@ -228,19 +231,19 @@ function Dashboard() {
                     >
                       <FormControlLabel
                         value='female'
-                        control={<Radio />}
+                        control={<Radio required={true}/>}
                         label='Female'
 
                       />
                       <FormControlLabel
                         value='male'
-                        control={<Radio />}
+                        control={<Radio required={true}/>}
                         label='Male'
 
                       />
                       <FormControlLabel
                         value='both'
-                        control={<Radio />}
+                        control={<Radio required={true}/>}
                         label='Both'
                       />
                     </RadioGroup>
@@ -258,7 +261,8 @@ function Dashboard() {
                 }}
                 options={interestList}
                 renderInput={(params) => (
-                  <TextField {...params} label='Interests' />
+                  <TextField {...params} label='Interests' 
+                  required/>
                 )}
                 
               />
