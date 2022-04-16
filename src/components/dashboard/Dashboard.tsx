@@ -1,8 +1,6 @@
 import React from 'react';
 import { getinterestList, setinterestList } from 'modules/interests';
-
-import NavBar from 'components/navBar/NavBar';
-import { PageName } from 'types';
+import AvatarUpload from 'components/AvatarUpload';
 import {
   Container,
   Grid,
@@ -19,12 +17,15 @@ import {
   CircularProgress,
 } from '@mui/material';
 import db from '../../db';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, updateDoc, setDoc } from 'firebase/firestore';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
+import { auth } from 'db';
+import { useNavigate } from 'react-router-dom';
+let photourlString: string;
 type UserProfileFormData = {
   firstName: string;
   lastName: string;
@@ -34,16 +35,23 @@ type UserProfileFormData = {
   interest: string;
   description: string;
   photoUrl: any;
+  levelOfExperience: number;
 };
 
+export async function addData(result: string) {
+  photourlString = result;
+}
 function Dashboard() {
   const { control, reset, handleSubmit } = useForm<UserProfileFormData>();
-  const userRef = collection(db, 'users');
   const interestList = useAppSelector(getinterestList);
   const dispatch = useAppDispatch();
   const [backdrop, setBackdrop] = useState(false);
   const [interesrValues, setInterestValue] = useState('');
+  const currentUser = auth.currentUser || { uid: '' };
+  const userRef = doc(db, "users", currentUser.uid);
+  const navigate = useNavigate();
   useEffect(() => {
+    
     if (interestList.length <= 0) {
       const updateInterestList = async () => {
         const data = await getAllInterests();
@@ -52,6 +60,7 @@ function Dashboard() {
       updateInterestList().catch((err) => {
         console.error(err);
       });
+      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,6 +74,8 @@ function Dashboard() {
     gender:'',
     email:'',
     photoURL: '',
+    levelOfExperience:[],
+    uid: currentUser.uid,
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === 'radio') {
@@ -81,43 +92,42 @@ function Dashboard() {
   }
   
   };
-  
-
   const onSubmit = handleSubmit(async () => {
-
+   
   let interest  = await setInterest(interesrValues);
     const addValues = {
       ...values,
+      uid: currentUser.uid,
       };
       setBackdrop(true);
-    const newGroupData: UserSaveFormData = {
+      await setDoc(userRef, {
+        userId: currentUser.uid
+      });
+      await updateDoc(userRef, {
       firstName : addValues.firstName,
       lastName : addValues.lastName,
       dispalyName : addValues.dispalyName,
       gender : addValues.gender,
       age: addValues.age,
-      photoURL: addValues.photoURL,
+      photoURL: photourlString,
       interests : [interest],
-      email : '',
+      email : auth.currentUser?.email,
       description : addValues.description,
-      
-        };
-        
-    await addDoc(userRef, newGroupData);
+      levelOfExperience : addValues.levelOfExperience,
+      userId: currentUser.uid,
+      });
     setBackdrop(false);
+    alert('user data saved successfully!');
     reset();
+    navigate(`/searchProfile`);
   });
   
   return (
     <div className="Dashboard">
-      <NavBar selectedName={PageName.DASHBOARD} />
       <form id='userForm' onSubmit={onSubmit}>
-
+      < AvatarUpload />
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
-          
           <Grid container spacing={4}>
-
-
             <Grid item xs={4} >
             <FormControl fullWidth>
             <Controller
@@ -133,6 +143,7 @@ function Dashboard() {
                 fullWidth
                 variant='standard'
                 onChange={handleChange}
+                required
               />
               )}
               />
@@ -234,6 +245,7 @@ function Dashboard() {
                       />
                     </RadioGroup>
                   )}
+                  
                 />
               </FormControl>
             </Grid>
@@ -248,7 +260,29 @@ function Dashboard() {
                 renderInput={(params) => (
                   <TextField {...params} label='Interests' />
                 )}
+                
               />
+            </Grid>
+            <Grid item xs={4} >
+              <FormControl fullWidth>
+                <Controller
+                  name='levelOfExperience'
+                  control={control}
+                  render={({ field: { name, value, onChange } }) => (
+                    <TextField id="levelOfExperience"
+                      label='Level of Performance'
+                      type="number"
+                      InputProps={{ inputProps: { min: "0", max: "10", step: "1" } }}
+                      variant="standard"
+                      onChange={handleChange}
+                      name={name}
+                      value={value}
+                      required
+                    />
+
+                  )}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth>
@@ -264,6 +298,7 @@ function Dashboard() {
                       name={name}
                       value={value}
                       onChange={handleChange}
+                      required
                     />
                   )}
                 />
