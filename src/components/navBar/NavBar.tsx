@@ -18,7 +18,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import Login from 'components/login/Login';
 import Profile from 'components/profile/Profile';
-import GroupsIcon from '@mui/icons-material/Groups';
 
 function MenuListItems(props: any) {
   const navigate = useNavigate();

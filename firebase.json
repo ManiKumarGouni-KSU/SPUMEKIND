@@ -1,11 +1,11 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"],
-    "appAssociation": "AUTO",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",

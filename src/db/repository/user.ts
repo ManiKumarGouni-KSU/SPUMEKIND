@@ -5,9 +5,7 @@ const COLLECTION_NAME = "users";
 export const getLoggedInUser = async (user: { uid: string; firstName: string; email: string; photoURL: any; lastName: string; displayname: string; age: number}): Promise<UserData> => {
     const docRef = doc(db, COLLECTION_NAME, user.uid);
     const docSnap = await getDoc(docRef);
-console.log(docSnap + ' docSnap');
     if (docSnap.exists()) {
-        console.log(docSnap.data());
         return docSnap.data() as UserData;
     } else {
         // add doc
