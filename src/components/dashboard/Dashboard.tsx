@@ -17,12 +17,14 @@ import {
   CircularProgress,
 } from '@mui/material';
 import db from '../../db';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, updateDoc, setDoc } from 'firebase/firestore';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
+import { auth } from 'db';
+import { useNavigate } from 'react-router-dom';
 let photourlString: string;
 type UserProfileFormData = {
   firstName: string;
@@ -41,12 +43,15 @@ export async function addData(result: string) {
 }
 function Dashboard() {
   const { control, reset, handleSubmit } = useForm<UserProfileFormData>();
-  const userRef = collection(db, 'users');
   const interestList = useAppSelector(getinterestList);
   const dispatch = useAppDispatch();
   const [backdrop, setBackdrop] = useState(false);
   const [interesrValues, setInterestValue] = useState('');
+  const currentUser = auth.currentUser || { uid: '' };
+  const userRef = doc(db, "users", currentUser.uid);
+  const navigate = useNavigate();
   useEffect(() => {
+    
     if (interestList.length <= 0) {
       const updateInterestList = async () => {
         const data = await getAllInterests();
@@ -69,7 +74,8 @@ function Dashboard() {
     gender:'',
     email:'',
     photoURL: '',
-    levelOfExperience:[]
+    levelOfExperience:[],
+    uid: currentUser.uid,
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === 'radio') {
@@ -91,9 +97,13 @@ function Dashboard() {
   let interest  = await setInterest(interesrValues);
     const addValues = {
       ...values,
+      uid: currentUser.uid,
       };
       setBackdrop(true);
-    const newGroupData: UserSaveFormData = {
+      await setDoc(userRef, {
+        userId: currentUser.uid
+      });
+      await updateDoc(userRef, {
       firstName : addValues.firstName,
       lastName : addValues.lastName,
       dispalyName : addValues.dispalyName,
@@ -101,22 +111,21 @@ function Dashboard() {
       age: addValues.age,
       photoURL: photourlString,
       interests : [interest],
-      email : '',
+      email : auth.currentUser?.email,
       description : addValues.description,
-      levelOfExperience : addValues.levelOfExperience
-        };
-        
-    await addDoc(userRef, newGroupData);
+      levelOfExperience : addValues.levelOfExperience,
+      userId: currentUser.uid,
+      });
     setBackdrop(false);
     alert('user data saved successfully!');
     reset();
+    navigate(`/searchProfile`);
   });
   
   return (
     <div className="Dashboard">
-     
       <form id='userForm' onSubmit={onSubmit}>
-      < AvatarUpload/>
+      < AvatarUpload />
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={4}>
             <Grid item xs={4} >
@@ -134,6 +143,7 @@ function Dashboard() {
                 fullWidth
                 variant='standard'
                 onChange={handleChange}
+                required
               />
               )}
               />
@@ -235,6 +245,7 @@ function Dashboard() {
                       />
                     </RadioGroup>
                   )}
+                  
                 />
               </FormControl>
             </Grid>
@@ -249,6 +260,7 @@ function Dashboard() {
                 renderInput={(params) => (
                   <TextField {...params} label='Interests' />
                 )}
+                
               />
             </Grid>
             <Grid item xs={4} >
@@ -286,6 +298,7 @@ function Dashboard() {
                       name={name}
                       value={value}
                       onChange={handleChange}
+                      required
                     />
                   )}
                 />
