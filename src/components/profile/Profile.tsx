@@ -5,6 +5,7 @@ import { signOutUser } from 'db/repository/auth';
 import {deleteUser } from 'db/repository/user';
 function Profile() {
   const currentUser = auth.currentUser;
+  console.log(currentUser?.photoURL);
   const [photoURL, setPhotoURL] = useState('/anonymous_user_avatar.png');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
