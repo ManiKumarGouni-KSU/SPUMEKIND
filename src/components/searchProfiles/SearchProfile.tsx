@@ -73,28 +73,30 @@ function SearchProfile(){
     });
     getUser()// eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const addMatchingProfiles = async (values : UserData) => {
+    
+    console.log('Add values ');
+  await addDoc(userRef, {
+  name: values?.firstName +' '+ values?.lastName,
+  photoURL: values?.photoURL,
+  uid: auth.currentUser?.uid,
+  interests: values?.interests,
+  userId: values?.userId
+});
+};
   const saveMatches = async (values : UserData) => {
     const getList = await getUpdateSearchList(values?.uid);
     let updateFlag : boolean = true;
     getList.forEach((doc) =>{  
       console.log('doc?.userId ' + doc.uid); 
-      console.log('values?.userId ' + values?.userId); 
-      if(doc?.userId === values?.userId){
+      console.log('values?.userId ' + values?.uid); 
+      if(doc?.uid === values?.userId){
         updateFlag = false;
+      } else { 
+        addMatchingProfiles(values);
       }
       });
-      console.log('updateFlag ' + updateFlag);
-      if(updateFlag){
-        console.log('Add values ');
-      await addDoc(userRef, {
-      name: values?.firstName +' '+ values?.lastName,
-      photoURL: values?.photoURL,
-      uid: auth.currentUser?.uid,
-      interests: values?.interests,
-      userId: values?.userId
-    });
-    
-  }
+     
   };
   const onSubmit = handleSubmit(async () => {
     console.log(user?.interests.length + ' list of interests');

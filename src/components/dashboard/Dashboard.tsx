@@ -17,7 +17,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import db from '../../db';
-import { doc, updateDoc, setDoc } from 'firebase/firestore';
+import { doc, collection, addDoc } from 'firebase/firestore';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
@@ -95,15 +95,14 @@ function Dashboard() {
   const onSubmit = handleSubmit(async () => {
     if(photourlString !== undefined){
   let interest  = await setInterest(interesrValues);
+  const userAddRef = collection(db, 'users');
     const addValues = {
       ...values,
       uid: currentUser.uid,
       };
       setBackdrop(true);
-      await setDoc(userRef, {
-        userId: currentUser.uid
-      });
-      await updateDoc(userRef, {
+      
+      await addDoc(userAddRef, {
       firstName : addValues.firstName,
       lastName : addValues.lastName,
       dispalyName : addValues.dispalyName,
@@ -114,8 +113,9 @@ function Dashboard() {
       email : auth.currentUser?.email,
       description : addValues.description,
       levelOfExperience : addValues.levelOfExperience,
+      userId: currentUser.uid,
       });
-      
+    
     setBackdrop(false);
     alert('user data saved successfully!');
     reset();
