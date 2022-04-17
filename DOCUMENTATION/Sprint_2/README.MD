@@ -11,7 +11,12 @@
   
   
 # Sprint2 Userstories and Forecasted Points( Points)
- &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+ Userstory                                                           Story Points
+ 
+ As a user I want to delete my profile                                     8
+ As a user I want to upload an image in profile page.                      5
+ As a user I want to find matches based on interests, skill level.         8
+ 
  
 # Jira Product backlog
 
