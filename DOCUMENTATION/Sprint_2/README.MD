@@ -14,7 +14,9 @@
  Userstory&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;Story Points
  
  As a user I want to delete my profile&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; 8
+ 
  As a user I want to upload an image in profile page.&emsp;&emsp; &emsp; &emsp;5
+ 
  As a user I want to find matches based on interests, skill level. &emsp; &emsp;8
  
  
