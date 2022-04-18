@@ -11,9 +11,9 @@
   
   
 # Sprint2 Userstories and Forecasted Points( Points)
- Total Forecasted points : 21
+ Total Forecasted points : 26
  
- Completed points : 21
+ Completed points : 26
  
  
  ### Userstory&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; Story Points
