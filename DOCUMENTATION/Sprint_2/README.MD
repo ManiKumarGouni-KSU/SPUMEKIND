@@ -22,7 +22,9 @@
  
  As a user I want to upload an image in profile page &emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;5
  
- As a user I want to find matches based on interests, skill level &emsp;&emsp; &emsp; &emsp; 8
+ As a user I want to find matches based on interests, skill level &emsp;&emsp; &emsp;  8
+ 
+ TDD unit test cases for saving Image and search profile.&emsp; &emsp;&emsp; &emsp;&emsp;5
  
  
 # Jira Product backlog
