@@ -64,6 +64,12 @@ https://kennesawedu-my.sharepoint.com/:v:/g/personal/dpottipa_students_kennesaw_
 Team developed CI and CD using Github Actions. When user create pull request, the system run a workflow that run all test cases and create temporary demo page when all tests are passes. Team members can test the new features in the demo page and review the code accordingly. The following link shows the CI script:
 https://github.com/ManiKumarGouni-KSU/SPUMEKIND/blob/main/.github/workflows/firebase-hosting-pull-request.yml
 
+![Screenshot (6)](https://user-images.githubusercontent.com/99055144/163868149-2fc99558-2532-4877-9dc0-89e39065d53a.png)
+
+
 Also, when a team member merges his/her code to the main branch, the system will test all changes and deploy to the hosting server automatically. The following link shows the CD script:
 https://github.com/ManiKumarGouni-KSU/SPUMEKIND/blob/main/.github/workflows/firebase-hosting-merge.yml
+
+![Screenshot (7)](https://user-images.githubusercontent.com/99055144/163868178-9120d119-8e65-4a9f-9b7a-c1c3d3f61a38.png)
+
 
