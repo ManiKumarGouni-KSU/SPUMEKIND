@@ -58,7 +58,7 @@ https://user-images.githubusercontent.com/99055144/163694536-6425992a-79d8-4ba0-
 https://emergingswe-bd158.web.app/
 
 # Demo of Sprint 2 stories
-
+https://kennesawedu-my.sharepoint.com/:v:/g/personal/dpottipa_students_kennesaw_edu/EebytDAA68lKie2I0qytLxsBEutq2MDyCwpL0pfm_ZbRXQ
 
 ## Continuous Integration & Continous Deployment
 Team developed CI and CD using Github Actions. When user create pull request, the system run a workflow that run all test cases and create temporary demo page when all tests are passes. Team members can test the new features in the demo page and review the code accordingly. The following link shows the CI script:
