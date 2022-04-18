@@ -33,7 +33,8 @@ https://swe6763.atlassian.net/jira/software/projects/SPS/boards/4/backlog
   
 #  Sprint Burndown Chart
 
-![Sprint 2 Burndown Chart](https://user-images.githubusercontent.com/99605998/163694527-1d36b535-b4d1-4c2f-893c-a31eb2667f12.jpg)
+![Sprint 2 Burndown Chart](https://user-images.githubusercontent.com/99605998/163859006-54fce3f0-6d7e-483a-98ce-39eb9757bd5a.jpg)
+
 
 # Daily Scrums
 
