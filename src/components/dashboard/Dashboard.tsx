@@ -17,7 +17,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import db from '../../db';
-import { doc, collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
@@ -48,7 +48,7 @@ function Dashboard() {
   const [backdrop, setBackdrop] = useState(false);
   const [interesrValues, setInterestValue] = useState('');
   const currentUser = auth.currentUser || { uid: '' };
-  const userRef = doc(db, "users", currentUser.uid);
+  //const userRef = doc(db, "users", currentUser.uid);
   const navigate = useNavigate();
   useEffect(() => {
     

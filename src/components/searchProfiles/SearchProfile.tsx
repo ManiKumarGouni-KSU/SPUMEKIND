@@ -86,13 +86,12 @@ function SearchProfile(){
 };
   const saveMatches = async (values : UserData) => {
     const getList = await getUpdateSearchList(values?.uid);
-    let updateFlag : boolean = true;
     getList.forEach((doc) =>{  
       console.log('doc?.userId ' + doc.uid); 
       console.log('values?.userId ' + values?.uid); 
       if(doc?.uid === values?.userId){
-        updateFlag = false;
-      } else { 
+
+      } else {
         addMatchingProfiles(values);
       }
       });
