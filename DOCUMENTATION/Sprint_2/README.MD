@@ -54,7 +54,7 @@ https://user-images.githubusercontent.com/99055144/163694536-6425992a-79d8-4ba0-
 
 https://emergingswe-bd158.web.app/
 
-# Demo of Sprint 1 stories
+# Demo of Sprint 2 stories
 
 
 ## Continuous Integration & Continous Deployment
