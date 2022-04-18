@@ -94,8 +94,7 @@ function SearchProfile(){
       } else {
         addMatchingProfiles(values);
       }
-      });
-     
+      });  
   };
   const onSubmit = handleSubmit(async () => {
     console.log(user?.interests.length + ' list of interests');
