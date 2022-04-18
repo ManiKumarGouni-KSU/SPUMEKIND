@@ -84,17 +84,19 @@ function SearchProfile(){
   userId: values?.userId
 });
 };
-  const saveMatches = async (values : UserData) => {
-    const getList = await getUpdateSearchList(values?.uid);
-    getList.forEach((doc) =>{  
-      console.log('doc?.userId ' + doc.uid); 
-      console.log('values?.userId ' + values?.uid); 
-      if(doc?.uid === values?.userId){
 
-      } else {
-        addMatchingProfiles(values);
+  const saveMatches = async (values : UserData) => {
+    const currentUser = auth.currentUser || { uid: '' };
+    const getList = await getUpdateSearchList(currentUser.uid);
+    getList.forEach((doc) =>{  
+      if(doc?.userId === values?.userId && doc.uid === currentUser.uid){
+        console.log('doc?.uid ' + doc.uid + 'doc?.userId ' + doc.userId); 
+        console.log('values?.userId ' + values?.userId + 'values?.userId ' + values?.uid); 
+      } else if(doc.uid === currentUser.uid) {
+        addMatchingProfiles(values); 
       }
-      });  
+      }); 
+      
   };
   const onSubmit = handleSubmit(async () => {
     console.log(user?.interests.length + ' list of interests');

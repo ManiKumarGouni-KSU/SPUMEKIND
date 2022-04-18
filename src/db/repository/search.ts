@@ -15,6 +15,7 @@ export const getGroupsByCriteria = async (criteria: GroupSearchFormData, uid: st
             
         }
     });
+    
     return data as Array<UserData>;
 }
 export const getSearchList = async (): Promise<UserSearchProfiles[]> => {
@@ -41,11 +42,10 @@ export const getSearchList = async (): Promise<UserSearchProfiles[]> => {
     const groupSnap = await getDocs(groupRef);
     const data: Array<any> = [];
     groupSnap.docs.forEach((_data) => {
-        if(userId !== _data.id){
+        if(userId !== _data.data().uid){
         data.push({ id: _data.id, ..._data.data() });
         }
     });
-    console.log(data as Array<UserSearchProfiles> + ' line 48');
     return data as Array<UserSearchProfiles>;
     
   };
