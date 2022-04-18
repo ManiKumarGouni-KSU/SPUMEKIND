@@ -26,6 +26,19 @@
  
  TDD unit test cases for saving Image and search profile.&emsp; &emsp;&emsp; &emsp;&emsp;5
  
+ ### Rationale
+**Story:** As a user I want to delete my profile.<br/>
+**Rationale:** In this story, we implemented user profile delete functionality <br/>
+**Story:** As a user I want to upload an image in profile page <br/>
+**Rationale:** In this story, we implemented functionality where user can upload their profile picture.<br/>
+**Story:** As a user I want to find matches based on interests, skill level.<br/>
+**Rationale:** By implementing this story, user can find their matches based on their interests.<br/>
+**Story:** TDD unit test cases for saving Image and search profile.<br/>
+**Rationale:** We used TDD approach to develop the saving Image and search profile<br/>
+
+In this sprint, we completely focused on allowing users to update their profile picture and delete user profiles. We are going to complete remaining high-level features in the next sprint.
+ 
+ 
  
 # Jira Product backlog
 
