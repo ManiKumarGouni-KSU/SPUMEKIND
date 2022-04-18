@@ -11,13 +11,18 @@
   
   
 # Sprint2 Userstories and Forecasted Points( Points)
- Userstory&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; Story Points
+ Total Forecasted points : 21
  
- As a user I want to delete my profile&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp;8
+ Completed points : 21
  
- As a user I want to upload an image in profile page.&emsp;&emsp; &emsp; &emsp;&emsp;5
+ 
+ ### Userstory&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; Story Points
  
- As a user I want to find matches based on interests, skill level.  8
+ As a user I want to delete my profile&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;8
+ 
+ As a user I want to upload an image in profile page &emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;5
+ 
+ As a user I want to find matches based on interests, skill level &emsp;&emsp; &emsp; &emsp; 8
  
  
 # Jira Product backlog
@@ -29,6 +34,8 @@ https://swe6763.atlassian.net/jira/software/projects/SPS/boards/4/backlog
 ![Sprint 2 Burndown Chart](https://user-images.githubusercontent.com/99605998/163694527-1d36b535-b4d1-4c2f-893c-a31eb2667f12.jpg)
 
 # Daily Scrums
+
+[Sprint 2 -  SWE 6733 EMERGING SOFTWARE ENGINEERING PROCESS(1-28).xlsx](https://github.com/ManiKumarGouni-KSU/SPUMEKIND/files/8502686/Sprint.2.-.SWE.6733.EMERGING.SOFTWARE.ENGINEERING.PROCESS.1-28.xlsx)
 
 
 # Mob Programming
