@@ -1,6 +1,6 @@
 import { render, RenderResult, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { UserData, GroupSearchFormData} from 'types/index';
+import { UserData, GroupSearchFormData, UserSearchProfiles } from 'types/index';
 import { store } from 'modules/index';
 import { setUser } from 'modules/user';
 import SearchProfile from 'components/searchProfiles/SearchProfile';
@@ -46,5 +46,20 @@ const newUser: UserData = {
           'There are no available user profile matching . Please modify your criteria to find a search.'
         )[0];
         expect(emptyResult).toBeInTheDocument();
+      });
+      test('When user have a joined group, display joined group members', () => {
+        let searchProfileList = Object.assign({}, newUser);
+        let members =
+          {
+            name: 'test member',
+            photoURL: 'test',
+            uid: 'uid_abc',
+            userId: 'userId_efg',
+           
+          }
+       
+        renderSearchResultGroup();
+        let groupMembers = screen.getByTestId('group-members-avatar-search-result');
+        expect(groupMembers).toBeInTheDocument();
       });
     });
