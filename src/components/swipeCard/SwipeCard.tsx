@@ -9,6 +9,8 @@ import MdMessage from '@mui/icons-material/Message';
 import Chip from '@mui/material/Chip';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import  'components/CometChatWorkspace/src/components';
+import { CometChat } from '@cometchat-pro/chat';
+import { COMETCHAT_CONSTANTS } from 'consts';
 function SwipeCard() {
   const navigate = useNavigate();
   const [group, setGroup] = useState<UserSearchProfiles[]>();
@@ -44,11 +46,23 @@ function SwipeCard() {
   }
 
   console.log('component render')
+  const loginCometChat = async ()=>{
+    try {
+      const user = await CometChat.login(
+        COMETCHAT_CONSTANTS.USER_UID,
+        COMETCHAT_CONSTANTS.AUTH_KEY,
+      );
+      console.log('Login Successful:', { user });
+      navigate(`/chat`);
+    } catch (error) {
+      console.log('Login failed with exception:', { error });
+    }
+  }
 
   return (
     <div>
       <ThemeProvider theme={theme}>
-      <button onClick={() => navigate(`/chat`)}>
+      <button onClick={() => loginCometChat()}>
        <Chip icon={<MdMessage />} label="" />
         </button>
       </ThemeProvider> 
@@ -68,5 +82,6 @@ function SwipeCard() {
     
   )
 }
+
 
 export default SwipeCard;
