@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import NavBar from 'components/navBar/NavBar';
 import { PageName } from 'types';
 
-
 function SwipeCardPage() {
+  
   return (
     
     <Box sx={{ justifyContent: 'center' }}>
@@ -13,7 +13,7 @@ function SwipeCardPage() {
     
       
       < SwipeCard/>
-      
+     
     </Box>
     
     

@@ -49,9 +49,8 @@ export interface UserSaveFormData {
     description: string;
     levelOfExperience: number[];
     uid: string;
-    
-}
-export interface GroupSearchFormData {
+    }
+    export interface GroupSearchFormData {
     interest: string;
     age: number[];
     gender: string;
