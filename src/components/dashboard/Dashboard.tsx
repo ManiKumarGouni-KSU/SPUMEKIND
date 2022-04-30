@@ -25,6 +25,8 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
 import { auth } from 'db';
 import { useNavigate } from 'react-router-dom';
+import InstagramFeed from '../instagram/InstagramFeed';
+
 let photourlString: string;
 type UserProfileFormData = {
   firstName: string;
@@ -124,6 +126,7 @@ function Dashboard() {
   
   return (
     <div className="Dashboard">
+      
       <form id='userForm' onSubmit={onSubmit}>
       < AvatarUpload />
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
@@ -322,8 +325,12 @@ function Dashboard() {
         <CircularProgress color='inherit' />
       </Backdrop>
       </form>
+      <h4>Instagram</h4>
+      <br></br>
+      <InstagramFeed token="IGQVJVWE1QTXNfRzlrVUtCMmNKdno5SEwzOHZAka251TzI3dkswUElhSHhQYkZAjZAFI1UWFYQWFjU1FXa3MzOFo0a1V2NVZA2a2RGbnlXVDBjVjZAVMm5qVlhiRXU4RW95YU1WVGd0SElySm5xRW9NcVpoWgZDZD"  counter="6"/>  
 
     </div>
+    
   );
 }
 
