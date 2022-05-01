@@ -26,6 +26,8 @@ import { getAllInterests, setInterest } from 'db/repository/interests';
 import { auth } from 'db';
 import { useNavigate } from 'react-router-dom';
 import InstagramFeed from '../instagram/InstagramFeed';
+import { getDoc } from "firebase/firestore";
+
 
 let photourlString: string;
 type UserProfileFormData = {
@@ -52,6 +54,7 @@ function Dashboard() {
   const currentUser = auth.currentUser || { uid: '' };
   const userRef = doc(db, "users", currentUser.uid);
   const navigate = useNavigate();
+  const [instagram,setInstagram]=useState('');
   useEffect(() => {
     
     if (interestList.length <= 0) {
@@ -66,6 +69,22 @@ function Dashboard() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  async function getInstagramID(){
+  const docRef = doc(db, "users", currentUser.uid);
+  const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data().instagram);
+  setInstagram(docSnap.data().instagram)
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+
+
+}
+getInstagramID();
   const [values, setValues] = useState<UserSaveFormData>({
     interests: [],
     firstName:'',
@@ -327,7 +346,7 @@ function Dashboard() {
       </form>
       <h4>Instagram</h4>
       <br></br>
-      <InstagramFeed token="IGQVJVWE1QTXNfRzlrVUtCMmNKdno5SEwzOHZAka251TzI3dkswUElhSHhQYkZAjZAFI1UWFYQWFjU1FXa3MzOFo0a1V2NVZA2a2RGbnlXVDBjVjZAVMm5qVlhiRXU4RW95YU1WVGd0SElySm5xRW9NcVpoWgZDZD"  counter="6"/>  
+      <InstagramFeed token={instagram}  counter="6"/>  
 
     </div>
     
