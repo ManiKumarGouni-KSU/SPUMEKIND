@@ -48,7 +48,7 @@ As a user I want to create my activity and skill board like hiking, skiing, and 
 
 **Rationale**: In this story, we allowed users to add or change their interests (skills), as well as update their user name, gender, and age. 
 
-**Story**: As a user I want to create my activity and skill board like hiking, skiing, and the level of proficiency respectively (ACTUAL story: TDD unit test cases for update user profile). 
+**Story**: As a user I want to create my activity and skill board like hiking, skiing, and the level of proficiency respectively. 
 
 **Rationale**: We used the TDD approach to develop the test cases for updating user profiles. The React Jest library was used to implement this. 
 
