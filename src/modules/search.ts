@@ -12,7 +12,6 @@ export const searchSlice = createSlice({
     initialState,
     reducers: {
         setSearchList: (state, action: PayloadAction<UserData[]>) => {
-            console.log(' searchSlice ' + action.payload);
             state.searchList = action.payload;
         }
     }

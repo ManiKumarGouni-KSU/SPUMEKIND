@@ -47,7 +47,7 @@ const newUser: UserData = {
         )[0];
         expect(emptyResult).toBeInTheDocument();
       });
-      test('When user have a joined group, display joined group members', () => {
+      test('When user have matching profiles, display list of users', () => {
         let searchProfileList = Object.assign({}, newUser);
         let members =
           {
@@ -56,8 +56,7 @@ const newUser: UserData = {
             uid: 'uid_abc',
             userId: 'userId_efg',
            
-          }
-       
+          } 
         renderSearchResultGroup();
         let groupMembers = screen.getByTestId('group-members-avatar-search-result');
         expect(groupMembers).toBeInTheDocument();

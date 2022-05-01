@@ -38,3 +38,16 @@ export const getUserInfo = async (uid: any)=> {
     const groupSnapshot = await getDocs(q);
     console.log(groupSnapshot);
 }
+export const updateUser = async (uid: string, userData: UserData): Promise<UserData> => {
+    try {
+        await setDoc(doc(db, COLLECTION_NAME, uid), {
+            ...userData
+        });
+    } catch (e) {
+        // need to handle error case.
+        return null as UserData;
+    }
+    const docRef = doc(db, COLLECTION_NAME, uid);
+    const newDocSnap = await getDoc(docRef);
+    return newDocSnap.data() as UserData;
+}
