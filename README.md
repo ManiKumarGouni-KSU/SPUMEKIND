@@ -13,6 +13,5 @@
 https://emergingswe-bd158.web.app/
 
 # Sprint 2
-https://github.com/ManiKumarGouni-KSU/SPUMEKIND/blob/main/DOCUMENTATION/Sprint_2/README.MD
-
+https://github.com/ManiKumarGouni-KSU/SPUMEKIND/blob/main/DOCUMENTATION/Sprint_3/README.MD
 
