@@ -11,9 +11,9 @@
   
   
 # Sprint3 Userstories and Forecasted Points( Points)
- Total Forecasted points : 26
+ Total Forecasted points : 37
  
- Completed points : 26
+ Completed points : 37
  
  
  ### Userstory&emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; Story Points
