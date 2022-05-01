@@ -4,7 +4,7 @@ export enum PageName {
     DASHBOARD = 'User Profile', 
     SWIPRCARD = 'Swipe Card',
     SEARCHPROFILE = 'Search Profiles',
-    
+    UPDATEUSER = 'Profile Update',
 }
 declare module '@mui/material/styles' {
     interface TypographyVariants {

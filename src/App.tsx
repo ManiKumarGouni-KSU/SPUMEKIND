@@ -11,6 +11,7 @@ import { getLoggedInUser } from 'db/repository/user';
 import DashboardPage from 'pages/DashboardPage';
 import SwipeCardPage from 'pages/SwipeCardPage';
 import SearchProfilePage from 'pages/SearchProfilePage';
+import UserProfilePage from 'pages/UserProfilePage';
 import {
   CometChatUI
 } from 'components/CometChatWorkspace/src/components';
@@ -56,7 +57,7 @@ function App() {
         <Route path='/dashboard' element={<DashboardPage/>} />
         <Route path='/swipeCard' element={<SwipeCardPage/>} />
         <Route path='/searchProfile' element={<SearchProfilePage/>} />
-       
+        <Route path='/updateUser' element={<UserProfilePage/>} />
         <Route path='/chat' element={<CometChatUI/>} />
                     
       </Routes>

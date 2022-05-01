@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { auth } from 'db';
 import { signOutUser } from 'db/repository/auth';
 import {deleteUser } from 'db/repository/user';
+import { useNavigate } from 'react-router-dom';
 function Profile() {
+  const navigate = useNavigate();
   const currentUser = auth.currentUser;
-  console.log(currentUser?.photoURL);
   const [photoURL, setPhotoURL] = useState('/anonymous_user_avatar.png');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -15,7 +16,9 @@ function Profile() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+const handleUserUpdate = () =>{
+  navigate(`/updateUser`);
+};
   useEffect(() => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL);
@@ -55,7 +58,7 @@ function Profile() {
         onClose={handleClose}
         MenuListProps={{ 'aria-labelledby': 'avatar-button' }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleUserUpdate}>Profile</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
         <MenuItem onClick={deleteAccount}>Delete Account</MenuItem>
       </Menu>
