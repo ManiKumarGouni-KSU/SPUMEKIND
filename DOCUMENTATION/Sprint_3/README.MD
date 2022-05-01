@@ -10,7 +10,7 @@
   Sputnika Madhavaram &emsp; &emsp; &emsp;Tech Lead
   
   
-# Sprint2 Userstories and Forecasted Points( Points)
+# Sprint3 Userstories and Forecasted Points( Points)
  Total Forecasted points : 26
  
  Completed points : 26
@@ -27,18 +27,28 @@
  TDD unit test cases for saving Image and search profile.&emsp; &emsp;&emsp; &emsp;&emsp;5
  
  ### Rationale
-**Story:** As a user I want to delete my profile.<br/>
-**Rationale:** In this story, we implemented user profile delete functionality <br/>
-**Story:** As a user I want to upload an image in profile page <br/>
-**Rationale:** In this story, we implemented functionality where user can upload their profile picture.<br/>
-**Story:** As a user I want to find matches based on interests, skill level.<br/>
-**Rationale:** By implementing this story, user can find their matches based on their interests.<br/>
-**Story:** TDD unit test cases for saving Image and search profile.<br/>
-**Rationale:** We used TDD approach to develop the saving Image and search profile<br/>
 
-In this sprint, we completely focused on allowing users to update their profile picture and delete user profiles. We are going to complete remaining high-level features in the next sprint.
- 
- 
+**Story**: As a user I want to chat, send voice messages within the app.  
+
+**Rationale**: In this story, we implement the chat component by using a third-party API, COMETCHAT, which provides text, audio, and video chatting functionalities within the application. 
+
+**Story**: As a user I want to share information on social medium. 
+
+**Rationale**: In this story, we integrated the Instagram API, which allows users to share profile pictures on Instagram directly from our application. 
+
+**Story**: As a user, I want to get the match profiles based on skills and activities with a swipe of a button.  
+
+**Rationale**: In this story, we used the react-tinder-card library to display matched profiles to the user and allow the user to swipe right or left. 
+
+**Story**: As a user, I want to update my profile with recent activities, and level of experience. 
+
+**Rationale**: In this story, we allowed users to add or change their interests (skills), as well as update their user name, gender, and age. 
+
+**Story**: As a user I want to create my activity and skill board like hiking, skiing, and the level of proficiency respectively (ACTUAL story: TDD unit test cases for update user profile). 
+
+**Rationale**: We used the TDD approach to develop the test cases for updating user profiles. The React Jest library was used to implement this. 
+
+In this sprint, we worked on integrating chat within the application along with the integration of social media into our application and completely focused on delivering a full-fledged real-time application as described in the project instructions. 
  
 # Jira Product backlog
 
