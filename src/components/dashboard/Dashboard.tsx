@@ -274,7 +274,7 @@ alert('Upload image');
                   control={control}
                   render={({ field: { name, value, onChange } }) => (
                     <TextField id="levelOfExperience"
-                      label='Level of Performance'
+                      label='Level of Experience'
                       type="number"
                       InputProps={{ inputProps: { min: "0", max: "10", step: "1" } }}
                       variant="standard"

@@ -159,7 +159,7 @@ function UserProfile() {
                                 <Grid item xs={12}>
                   <Box display='flex' justifyContent='space-between'>
                     <Typography component='h2' variant='h6' gutterBottom>
-                      Interrests
+                      Interests
                     </Typography>
                   </Box>
                   <TextField
