@@ -20,7 +20,7 @@
  
 As a user I want to chat, send voice messages within the app. &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;8
  
-As a user I want to share information on social medium. &emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;5
+As a user I want to share information on social medium. &emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;8
  
 As a user, I want to get the match profiles based on skills and activities with a swipe of a button. &emsp;&emsp; &emsp;  8
  
