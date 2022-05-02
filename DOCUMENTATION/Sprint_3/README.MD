@@ -56,6 +56,7 @@ In this sprint, we worked on integrating chat within the application along with 
  
 # Jira Product backlog
 
+https://swe6763.atlassian.net/jira/software/projects/SPS/boards/4/backlog
   
 #  Sprint Burndown Chart
 
