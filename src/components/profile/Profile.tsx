@@ -30,8 +30,8 @@ const handleUserUpdate = () =>{
   };
   const deleteAccount = async() => {
     let  user = auth.currentUser?.uid;
-    await deleteUser(user);
     if (window.confirm('Are you sure you want to delete account')) {
+      await deleteUser(user);
       alert('User account is successfully deleted.');
       signOutUser();
     } else {

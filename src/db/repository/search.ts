@@ -42,9 +42,7 @@ export const getSearchList = async (): Promise<UserSearchProfiles[]> => {
     const groupSnap = await getDocs(groupRef);
     const data: Array<any> = [];
     groupSnap.docs.forEach((_data) => {
-        if(userId !== _data.data().uid){
-        data.push({ id: _data.id, ..._data.data() });
-        }
+    data.push({ id: _data.id, ..._data.data() });
     });
     return data as Array<UserSearchProfiles>;
     
