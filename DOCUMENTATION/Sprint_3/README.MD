@@ -65,6 +65,7 @@ https://swe6763.atlassian.net/jira/software/projects/SPS/boards/4/backlog
 
 # Daily Scrums
 
+[Sprint 3 -  SWE 6733 EMERGING SOFTWARE ENGINEERING PROCESS(1-26).xlsx](https://github.com/ManiKumarGouni-KSU/SPUMEKIND/files/8605247/Sprint.3.-.SWE.6733.EMERGING.SOFTWARE.ENGINEERING.PROCESS.1-26.xlsx)
 
 
 # Mob Programming
@@ -95,12 +96,13 @@ https://emergingswe-bd158.web.app/
 Team developed CI and CD using Github Actions. When user create pull request, the system run a workflow that run all test cases and create temporary demo page when all tests are passes. Team members can test the new features in the demo page and review the code accordingly. The following link shows the CI script:
 https://github.com/ManiKumarGouni-KSU/SPUMEKIND/blob/main/.github/workflows/firebase-hosting-pull-request.yml
 
-![Screenshot (6)](https://user-images.githubusercontent.com/99055144/163868149-2fc99558-2532-4877-9dc0-89e39065d53a.png)
+![Screenshot (16)](https://user-images.githubusercontent.com/99055144/166303131-0bb8005a-8598-407e-b80a-6440a6ea9cae.png)
+
 
 
 Also, when a team member merges his/her code to the main branch, the system will test all changes and deploy to the hosting server automatically. The following link shows the CD script:
 https://github.com/ManiKumarGouni-KSU/SPUMEKIND/blob/main/.github/workflows/firebase-hosting-merge.yml
 
-![Screenshot (7)](https://user-images.githubusercontent.com/99055144/163868178-9120d119-8e65-4a9f-9b7a-c1c3d3f61a38.png)
+![Screenshot (17)](https://user-images.githubusercontent.com/99055144/166303154-4de814f7-a2d7-45ee-853a-9391c1318522.png)
 
 
