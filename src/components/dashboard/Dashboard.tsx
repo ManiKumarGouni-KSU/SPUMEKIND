@@ -17,7 +17,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import db from '../../db';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, updateDoc, setDoc,getDoc } from 'firebase/firestore';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
@@ -25,6 +25,9 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
 import { auth } from 'db';
 import { useNavigate } from 'react-router-dom';
+import InstagramFeed from '../instagram/InstagramFeed';
+
+
 let photourlString: string;
 type UserProfileFormData = {
   firstName: string;
@@ -48,8 +51,9 @@ function Dashboard() {
   const [backdrop, setBackdrop] = useState(false);
   const [interesrValues, setInterestValue] = useState('');
   const currentUser = auth.currentUser || { uid: '' };
-  //const userRef = doc(db, "users", currentUser.uid);
+  const userRef = doc(db, "users", currentUser.uid);
   const navigate = useNavigate();
+  const [instagram,setInstagram]=useState('');
   useEffect(() => {
     
     if (interestList.length <= 0) {
@@ -64,6 +68,22 @@ function Dashboard() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  async function getInstagramID(){
+  const docRef = doc(db, "users", currentUser.uid);
+  const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data().instagram);
+  setInstagram(docSnap.data().instagram)
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+
+
+}
+getInstagramID();
   const [values, setValues] = useState<UserSaveFormData>({
     interests: [],
     firstName:'',
@@ -93,16 +113,17 @@ function Dashboard() {
   
   };
   const onSubmit = handleSubmit(async () => {
-    if(photourlString !== undefined){
+   
   let interest  = await setInterest(interesrValues);
-  const userAddRef = collection(db, 'users');
     const addValues = {
       ...values,
       uid: currentUser.uid,
       };
       setBackdrop(true);
-      
-      await addDoc(userAddRef, {
+      await setDoc(userRef, {
+        userId: currentUser.uid
+      });
+      await updateDoc(userRef, {
       firstName : addValues.firstName,
       lastName : addValues.lastName,
       dispalyName : addValues.dispalyName,
@@ -115,18 +136,15 @@ function Dashboard() {
       levelOfExperience : addValues.levelOfExperience,
       userId: currentUser.uid,
       });
-    
     setBackdrop(false);
     alert('user data saved successfully!');
     reset();
     navigate(`/searchProfile`);
-    } else {
-alert('Upload image');
-    }
   });
   
   return (
     <div className="Dashboard">
+      
       <form id='userForm' onSubmit={onSubmit}>
       < AvatarUpload />
         <Container maxWidth='md' sx={{ mt: 4, mb: 4 }}>
@@ -231,19 +249,19 @@ alert('Upload image');
                     >
                       <FormControlLabel
                         value='female'
-                        control={<Radio required={true}/>}
+                        control={<Radio />}
                         label='Female'
 
                       />
                       <FormControlLabel
                         value='male'
-                        control={<Radio required={true}/>}
+                        control={<Radio />}
                         label='Male'
 
                       />
                       <FormControlLabel
                         value='both'
-                        control={<Radio required={true}/>}
+                        control={<Radio />}
                         label='Both'
                       />
                     </RadioGroup>
@@ -261,8 +279,7 @@ alert('Upload image');
                 }}
                 options={interestList}
                 renderInput={(params) => (
-                  <TextField {...params} label='Interests' 
-                  required/>
+                  <TextField {...params} label='Interests' />
                 )}
                 
               />
@@ -274,7 +291,7 @@ alert('Upload image');
                   control={control}
                   render={({ field: { name, value, onChange } }) => (
                     <TextField id="levelOfExperience"
-                      label='Level of Experience'
+                      label='Level of Performance'
                       type="number"
                       InputProps={{ inputProps: { min: "0", max: "10", step: "1" } }}
                       variant="standard"
@@ -326,8 +343,12 @@ alert('Upload image');
         <CircularProgress color='inherit' />
       </Backdrop>
       </form>
+      <h4>Instagram</h4>
+      <br></br>
+      <InstagramFeed token={instagram}  counter="6"/>  
 
     </div>
+    
   );
 }
 
