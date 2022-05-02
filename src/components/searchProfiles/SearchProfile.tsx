@@ -65,6 +65,7 @@ function SearchProfile(){
       });
       setUser(user);
     };
+   
     setCriteria({
       interest: user?.interests[0] ? user?.interests[0] : '',
       age: [0, 45],
@@ -88,15 +89,17 @@ function SearchProfile(){
   const saveMatches = async (values : UserData) => {
     const currentUser = auth.currentUser || { uid: '' };
     const getList = await getUpdateSearchList(currentUser.uid);
-    getList.forEach((doc) =>{  
+    if(getList.length > 0){
+     getList.forEach((doc) =>{
       if(doc?.userId === values?.userId && doc.uid === currentUser.uid){
         console.log('doc?.uid ' + doc.uid + 'doc?.userId ' + doc.userId); 
         console.log('values?.userId ' + values?.userId + 'values?.userId ' + values?.uid); 
-      } else if(doc.uid === currentUser.uid) {
-        addMatchingProfiles(values); 
-      }
+      } 
       }); 
-      
+    }  else{
+      addMatchingProfiles(values); 
+      console.log('line 104');
+    }
   };
   const onSubmit = handleSubmit(async () => {
     console.log(user?.interests.length + ' list of interests');

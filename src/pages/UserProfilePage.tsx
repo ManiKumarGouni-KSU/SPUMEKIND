@@ -10,8 +10,6 @@ function UserProfilePage(){
         <NavBar selectedName={PageName.UPDATEUSER} />
         < UserProfile/>
          </Box>
-        
-        
-      );
+        );
 }
 export default UserProfilePage;
