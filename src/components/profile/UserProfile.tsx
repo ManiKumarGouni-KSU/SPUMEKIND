@@ -4,11 +4,16 @@ import {
     CircularProgress,
     Chip,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import db from '../../db';
 import { getUser, setUser } from 'modules/user';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { auth } from 'db';
 import {  updateUser } from 'db/repository/user';
+import InstagramFeed from '../instagram/InstagramFeed';
+import { doc, updateDoc, setDoc,getDoc } from 'firebase/firestore';
+import { useState,useEffect } from 'react';
+
+
 function UserProfile() {
     const user = useAppSelector(getUser);
     const dispatch = useAppDispatch();
@@ -16,6 +21,8 @@ function UserProfile() {
     const [values, setValues] = useState<any>();
     const [interest, setInterest] = useState('');
     const [backdrop, setBackdrop] = useState(false);
+    const [instagram,setInstagram]=useState('');
+
     useEffect(() => {
         if (user) {
             setValues({ ...user });
@@ -83,6 +90,24 @@ function UserProfile() {
         const left = value.toLowerCase();
         return arr?.some((right) => left === right.toLowerCase());
     };
+    async function getInstagramID(){
+      const currentUser = auth.currentUser || { uid: '' };
+    
+      const docRef = doc(db, "users", currentUser.uid);
+      console.log(currentUser.uid);
+      const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data().instagram);
+      setInstagram(docSnap.data().instagram)
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    
+    
+    }
+    getInstagramID();
     return (
         <>
             <Box
@@ -265,6 +290,9 @@ function UserProfile() {
                     </form>
                 </Container>
             </Box>
+            <h4 style={{  justifyContent:'center', alignItems:'center'}}>Instagram</h4><br></br>
+            <InstagramFeed token="IGQVJXMjhwaWdMN05KT2Y4X204TTFzeE9ZAQlJoZA0pjMUp5Rk9TbkFIQXhYMlM5TXdXdS13eEhpME4wZAnYyeG1xU3ZAyWjVzQmlaUEswSHY3U21vWnJaYVhINThZAdEhKSURsbVFVZAGZASNF9GNDVaQ2pldAZDZD"  counter="6"/>  
+
         </>
     );
 }
