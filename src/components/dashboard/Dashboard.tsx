@@ -53,7 +53,6 @@ function Dashboard() {
   const currentUser = auth.currentUser || { uid: '' };
   const userRef = doc(db, "users", currentUser.uid);
   const navigate = useNavigate();
-  const [instagram,setInstagram]=useState('');
   useEffect(() => {
     
     if (interestList.length <= 0) {
@@ -69,21 +68,7 @@ function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function getInstagramID(){
-  const docRef = doc(db, "users", currentUser.uid);
-  const docSnap = await getDoc(docRef);
-
-if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data().instagram);
-  setInstagram(docSnap.data().instagram)
-} else {
-  // doc.data() will be undefined in this case
-  console.log("No such document!");
-}
-
-
-}
-getInstagramID();
+  
   const [values, setValues] = useState<UserSaveFormData>({
     interests: [],
     firstName:'',
@@ -343,9 +328,7 @@ getInstagramID();
         <CircularProgress color='inherit' />
       </Backdrop>
       </form>
-      <h4>Instagram</h4>
-      <br></br>
-      <InstagramFeed token={instagram}  counter="6"/>  
+    
 
     </div>
     
