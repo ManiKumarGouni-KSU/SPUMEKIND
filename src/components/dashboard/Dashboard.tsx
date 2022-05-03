@@ -17,7 +17,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import db from '../../db';
-import { doc, updateDoc, setDoc,getDoc } from 'firebase/firestore';
+import { doc, updateDoc, setDoc } from 'firebase/firestore';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { UserSaveFormData } from 'types';
@@ -25,7 +25,6 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { getAllInterests, setInterest } from 'db/repository/interests';
 import { auth } from 'db';
 import { useNavigate } from 'react-router-dom';
-import InstagramFeed from '../instagram/InstagramFeed';
 
 
 let photourlString: string;
