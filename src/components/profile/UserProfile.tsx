@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { auth } from 'db';
 import {  updateUser } from 'db/repository/user';
 import InstagramFeed from '../instagram/InstagramFeed';
-import { doc, updateDoc, setDoc,getDoc } from 'firebase/firestore';
+import { doc,getDoc } from 'firebase/firestore';
 import { useState,useEffect } from 'react';
 
 
@@ -291,7 +291,7 @@ function UserProfile() {
                 </Container>
             </Box>
             <h4 style={{  justifyContent:'center', alignItems:'center'}}>Instagram</h4><br></br>
-            <InstagramFeed token="IGQVJXMjhwaWdMN05KT2Y4X204TTFzeE9ZAQlJoZA0pjMUp5Rk9TbkFIQXhYMlM5TXdXdS13eEhpME4wZAnYyeG1xU3ZAyWjVzQmlaUEswSHY3U21vWnJaYVhINThZAdEhKSURsbVFVZAGZASNF9GNDVaQ2pldAZDZD"  counter="6"/>  
+            <InstagramFeed token={instagram}  counter="6"/>  
 
         </>
     );
